@@ -1,0 +1,13 @@
+.activeLink {
+  color: #2441e7 !important;
+  background-color: #f9fafc;
+}
+.activeLink:before {
+  background-color: #2441e7;
+  bottom: 0;
+  content: "";
+  position: absolute;
+  right: 0px;
+  top: 0;
+  width: 2px;
+}

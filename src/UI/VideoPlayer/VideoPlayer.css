@@ -1,0 +1,13 @@
+.video-wrapper {
+  max-width: 639px;
+}
+
+.cuepoint {
+  cursor: pointer;
+  color: #9c9c9c;
+}
+
+.cuepoint:hover,
+.cuepoint:active {
+  color: #000;
+}

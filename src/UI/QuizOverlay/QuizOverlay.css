@@ -1,0 +1,76 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.Modal {
+  position: fixed;
+  top: 2vh;
+  margin: auto;
+  left: 0;
+  right: 0;
+  width: fit-content;
+  z-index: 10000;
+  overflow: hidden;
+}
+
+.qoverlay {
+  width: 600px;
+  height: 600px;
+  padding: 20px 30px;
+  border-radius: 5px;
+}
+
+.qoverlay .scroll {
+  position: relative;
+  height: -webkit-fill-available;
+  overflow-y: auto;
+}
+
+.qoverlay .scroll .marks {
+  position: absolute;
+  width: fit-content;
+  padding: 10px;
+  margin: 0;
+  top: 0;
+  right: 0;
+}
+
+.qoverlay .scroll .ans-set {
+  padding: 0 0 5px;
+  margin: 0 15px 10px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.qoverlay .scroll .ans-set p.quest {
+  margin: 0;
+  font-size: 18px;
+  color: #0a0a0a;
+  font-family: initial;
+}
+
+.qoverlay .scroll .ans-set p.correct-ans {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  padding: 5px 10px;
+  display: inline-block;
+  color: green;
+  text-transform: uppercase;
+}
+
+.qoverlay .scroll .ans-set p.wrong-ans {
+  font-size: 16px;
+  font-weight: 600;
+  padding: 5px 10px;
+  margin: 0;
+  color: red;
+  display: inline-block;
+  width: fit-content;
+  text-transform: uppercase;
+}

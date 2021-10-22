@@ -1,0 +1,58 @@
+.live-page {
+  position: relative;
+  z-index: 100000000;
+  background: #fff;
+  padding: 20px;
+}
+.live-page h1.title {
+  font-size: 30px;
+  font-weight: 600;
+  color: #2441e7;
+  padding: 20px 10px 0;
+  margin: 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+.live-page h2.title {
+  font-size: 20px;
+  color: #2441e7;
+  padding: 0 0 10px;
+  margin: 0;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+}
+.live-page p {
+  font-size: 16px;
+  padding: 5px;
+  margin: 0 0 5px;
+  color: #0a0a0a;
+}
+.live-page .row {
+  margin: 0;
+}
+.live-page .row > div {
+  padding: 10px;
+}
+.live-page .live-footer {
+  text-align: right;
+  padding: 5px 10px;
+}
+.live-page .live-footer .live-btn {
+  font-size: 16px;
+  padding: 5px 10px;
+  color: #2441e7;
+  display: inline-block;
+  border: 1px solid #2441e7;
+  outline: none;
+  background: linear-gradient(to right, #2441e7 50%, #fff 50%);
+  background-size: 200%;
+  background-position: top right;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: all linear 0.3s;
+}
+.live-page .live-footer .live-btn:hover {
+  color: #fff;
+  background-position: top left;
+}

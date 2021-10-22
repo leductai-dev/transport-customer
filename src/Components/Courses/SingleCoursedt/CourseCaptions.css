@@ -1,0 +1,9 @@
+.caption {
+  cursor: pointer;
+  color: #9c9c9c;
+}
+
+.caption:hover,
+.caption:active {
+  color: #000;
+}

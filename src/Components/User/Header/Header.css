@@ -1,0 +1,35 @@
+.dashboard .dash-overlay {
+  position: absolute;
+  background: rgb(225, 230, 239);
+  top: 50px;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  z-index: 100;
+}
+.dashboard .dash-overlay ul.nav-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.dashboard .dash-overlay ul.nav-list li a.list-link {
+  padding: 10px;
+  font-size: 16px;
+  display: inline-block;
+  width: 100%;
+  color: #0a0a0a;
+  text-decoration: none;
+}
+.dashboard .dash-overlay ul.nav-list li a.list-link:hover {
+  background: #ccc;
+}
+.dashboard .dash-overlay ul.nav-list li a.list-link i {
+  width: 20px;
+  margin: 0;
+  margin-right: 5px;
+}
+@media only screen and (min-width: 768px) {
+  .dashboard .dash-overlay {
+    display: none;
+  }
+}
