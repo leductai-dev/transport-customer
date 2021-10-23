@@ -52,12 +52,10 @@ const Signin = (props) => {
         }
       }
 
-      slideRight.style.transform = `translateY(-${
-        activeSlideIndex * sliderHeight
-      }px)`;
-      slideLeft.style.transform = `translateY(${
-        activeSlideIndex * sliderHeight
-      }px)`;
+      slideRight.style.transform = `translateY(-${activeSlideIndex * sliderHeight
+        }px)`;
+      slideLeft.style.transform = `translateY(${activeSlideIndex * sliderHeight
+        }px)`;
     };
   });
 
@@ -238,26 +236,18 @@ const Signin = (props) => {
         )}
         <div className="left-slide">
           <div class="left-bg" className={classes.leftbg1}>
-            <h1 style={{ left: "16%" }}>Institution Login</h1>
+            <h1 style={{ left: "16%" }}>Staff Login</h1>
             <p style={{ marginLeft: "30px" }}>
-              Not a INSTITUTION ? Click Here
-              <span>
-                <img src="/images/arrow.png" alt="arrow.png" />
-              </span>
+              Not a Staff ? Click Here
+
             </p>
             <p></p>
           </div>
           <div class="left-bg" className={classes.leftbg2}>
-            <h1>Student Login</h1>
+            <h1>Customer Login</h1>
             <p style={{ marginLeft: "60px" }}>
-              Not a STUDENT ? Click Here
-              <span>
-                <img
-                  src="/images/arrow.png"
-                  alt="arrow.png"
-                  style={{ marginTop: "-30%" }}
-                />
-              </span>
+              Not a customer ? Click Here
+
             </p>
             <p></p>
           </div>
@@ -266,7 +256,7 @@ const Signin = (props) => {
           <div className="container-fluid">
             <div className="container">
               <form onSubmit={submitHandler}>
-                <div className="title">Student Login</div>
+                <div className="title">Customer Login</div>
                 {error && (
                   <>
                     <Alert
@@ -279,14 +269,14 @@ const Signin = (props) => {
                     {/* force logout from all other devices */}
                     {error ===
                       "Already logged in, logout from other device to login again..." && (
-                      <button
-                        type="button"
-                        className="btn btn-primary"
-                        onClick={forceLogout}
-                      >
-                        Force Logout From All Other devices
-                      </button>
-                    )}
+                        <button
+                          type="button"
+                          className="btn btn-primary"
+                          onClick={forceLogout}
+                        >
+                          Force Logout From All Other devices
+                        </button>
+                      )}
                   </>
                 )}
                 <div className="input-box underline">
@@ -353,7 +343,7 @@ const Signin = (props) => {
           <div className="container-fluid">
             <div className="container ">
               <form action="#">
-                <div className="title">Institution Login</div>
+                <div className="title">Staff Login</div>
                 <div className="input-box underline">
                   <input
                     type="text"
@@ -377,7 +367,7 @@ const Signin = (props) => {
                     type="submit"
                     name=""
                     value="Login"
-                    // onClick="login(document.getElementById('usem').value,document.getElementById('pass').value)"
+                  // onClick="login(document.getElementById('usem').value,document.getElementById('pass').value)"
                   />
                 </div>
               </form>
@@ -385,7 +375,7 @@ const Signin = (props) => {
                 <span>or</span>
               </p>
               <p className="subtitle">
-                Don't have an account? <a href="#institutionsignup"> sign Up</a>
+                Don't have an account? <a href="#Staffsignup"> sign Up</a>
               </p>
             </div>
           </div>
