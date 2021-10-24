@@ -12,7 +12,7 @@ const Registration = (props) => {
     } else {
       ui = (
         <Link className="reg_btn" to="/login">
-          Bắt đầu ngay
+          Start now
         </Link>
       );
     }
@@ -23,9 +23,9 @@ const Registration = (props) => {
       <section className="reg_sect">
         <div className="container-fluid">
           <div className="inner_container">
-            <p>Tạo đơn hàng ngay bây giờ</p>
+            <p>Create an order now!</p>
             <h3>
-              Tính toán mức giá và sự lựa chọn cho đơn hàng của bạn
+              Calculate the most suitable and economical price and choice for your order.
             </h3>
             {/* <form action="#blankpage" method="get"> */}
             {ui}

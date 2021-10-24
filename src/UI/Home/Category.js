@@ -11,10 +11,9 @@ const Category = (props) => {
   return (
     <section className="crs_sect" id="ourcourse">
       <div className="container-fluid">
-        <h3>Dịch vụ của chúng tôi</h3>
+        <h3>Our service</h3>
         <p className="crs_title">
-          Các Giải pháp Vận chuyển của chúng tôi hỗ trợ doanh nghiệp bạn duy trì các mức dịch vụ cao và đáng tin cậy, đồng thời đạt được khả năng theo dõi toàn bộ quá trình vận chuyển sản phẩm. Đồng thời chúng tôi hỗ trợ cắt giảm chi phí vận chuyển. Đội ngũ của chúng tôi kết hợp lý tưởng các hệ thống, các hãng vận chuyển và các nguồn lực để đáp ứng nhu cầu cụ thể của bạn.
-
+          Our Shipping Solutions help your business maintain high and reliable service levels and achieve full tracking of product shipments. At the same time, we help cut shipping costs. Our team ideally combines systems, carriers and resources to meet your specific needs.
         </p>
         <div className="row">
           {props.category.map((cate, i) => {
@@ -115,7 +114,7 @@ const Category = (props) => {
         </div> */}
         {/* <form action="courses.html" method="get"> */}
         <Link className="crs_btn" to={`${props.match.url}/courses`}>
-          Xem tất cả
+          See all
         </Link>
         {/* </form> */}
       </div>

@@ -11,10 +11,10 @@ const Footer = (props) => {
             <div className="col-sm-6 col-md-4 col-md-3 col-lg-3">
               <div className="footer_contact_widget">
                 <h4>CONTACT</h4>
-                <p>329 Queensberry Street, North Melbourne </p>
-                <p>VIC 3051, Australia.</p>
-                <p>123 456 7890</p>
-                <p>support@smartedu.com</p>
+                <p>254 Nguyen Van Linh </p>
+                <p>Da Nang , Viet Nam.</p>
+                <p>0347247099</p>
+                <p>letrunghieu5612@gmail.com</p>
               </div>
             </div>
             <div className="col-sm-6 col-md-4 col-md-3 col-lg-2">
@@ -112,11 +112,8 @@ const Footer = (props) => {
           <div className="row">
             <div className="col-sm-4 col-md-3 col-lg-3 col-xl-2 p15">
               <div className="logo-widget home1">
-                <img
-                  className="img-fluid"
-                  src="../../others/Bodhi1.png"
-                  alt="bodhi"
-                />
+                <div className="navbar_img"></div>
+
               </div>
             </div>
             <div className="col-sm-8 col-md-5 col-lg-6 col-xl-6 p25 brdr_left_right">

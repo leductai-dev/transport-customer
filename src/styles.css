@@ -4411,3 +4411,178 @@ spaned {
   background-color: #2441e7;
   color: #ffffff;
 }
+
+body {
+	background-color: #fff;
+	color: #3c464b;
+}
+
+.pricing-plans {
+	font-family: 'Roboto', sans-serif;
+	position: relative;
+	margin: 0 auto;
+	max-width: 100%;
+}
+
+.pricing-plans .plan {
+	width: 90%;
+	margin: 0 auto;
+	min-width: 0;
+	-webkit-box-shadow: 0 3px 0px 0 rgba(0, 0, 0, 0.08);
+	box-shadow: 0 3px 0px 0 rgba(0, 0, 0, 0.08);
+	transition: all .3s ease-in-out;
+	padding: 2.25rem 0;
+	position: relative;
+	will-change: transform;
+	text-align: center;
+}
+
+.pricing-plans .plan:before {
+	position: relative;
+	content: '';
+	border: 1px solid transparent;
+	width: 100%;
+	display: block;
+	padding: .5rem;
+	height: 42px;
+}
+
+@media only screen and (min-width: 1200px) {
+	.pricing-plans .plan {
+		width: 14.28571428571429%;
+	}
+}
+
+.pricing-plans .plan.options {
+	font-size: .75rem;
+}
+
+.pricing-plans .plan.popular:before {
+	background-color: #ddd;
+	content: 'MOST POPULAR';
+	border-color: #ddd;
+}
+
+.pricing-plans .plan .plan-header {
+	border: 1px solid #ddd;
+	border-right-color: transparent;
+	border-bottom-color: transparent;
+	background-color: RGB(221, 221, 221, 0.2);
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	vertical-align: top;
+	position: relative;
+	min-height: 185px;
+	padding: 1.5rem;
+}
+
+.pricing-plans .plan .plan-header.first {
+	border-color: transparent;
+	background-color: transparent;
+}
+
+.pricing-plans .plan .plan-header.last {
+	border-right: 1px solid #ddd;
+}
+
+.pricing-plans .plan .plan-header h3 {
+	font-size: 2rem;
+	margin: 0;
+	text-align: center;
+}
+
+.pricing-plans .plan .plan-header h3 .label {
+	display: block;
+	font-size: 1rem;
+	letter-spacing: 1px;
+	margin: 0 auto 0px;
+	text-transform: uppercase;
+	font-weight: 700;
+}
+
+.pricing-plans .plan .plan-header h3 .figure {
+	padding: 5px 0 5px;
+	position: relative;
+}
+
+.pricing-plans .plan .plan-header h3 .figure span {
+	display: inline-block;
+}
+
+.pricing-plans .plan .plan-header h3 .figure .amount {
+	font-size: 4rem;
+	font-weight: 700;
+	letter-spacing: -3px;
+	line-height: 1;
+}
+
+.pricing-plans .plan .plan-header h3 .figure .amount:before {
+	content: '$';
+	font-size: 1.3rem;
+	font-weight: 400;
+	vertical-align: top;
+	letter-spacing: normal;
+}
+
+.pricing-plans .plan .plan-header h3 .figure .amount:after {
+	position: relative;
+	top: -6px;
+	content: '/MO';
+	letter-spacing: normal;
+	font-weight: 400;
+	vertical-align: bottom;
+	font-size: .8rem;
+	text-transform: uppercase;
+}
+
+.pricing-plans .plan .plan-header h3 .foreword {
+	display: block;
+	font-size: .8rem;
+	text-transform: uppercase;
+	padding: 0;
+}
+
+.pricing-plans .plan .plan-header h3 .afterword {
+	font-size: .7rem;
+	text-transform: uppercase;
+	padding: 0;
+	white-space: nowrap;
+	color: #84949c;
+	letter-spacing: 0px;
+}
+
+.pricing-plans .plan .plan-header h3 .text {
+	font-size: 1rem;
+	line-height: 1.5;
+	margin: 0px;
+	text-align: left;
+}
+
+.pricing-plans .plan .plan-header .button {
+	margin-top: auto;
+	display: block;
+}
+
+.pricing-plans .plan .plan-info .list-group .list-group-item {
+	border-radius: 0px;
+	border-width: 1px;
+	border-right-color: transparent;
+	font-weight: 700;
+}
+
+@media only screen and (min-width: 1200px) {
+	.pricing-plans .plan .plan-info .list-group.first {
+		margin-top: 11.75rem;
+	}
+}
+
+.pricing-plans .plan .plan-info .list-group.first .list-group-item {
+	border-color: transparent;
+	padding: .9rem 1rem;
+}
+
+.pricing-plans .plan .plan-info .list-group.last .list-group-item {
+	border-right-color: #ddd;
+}
+
