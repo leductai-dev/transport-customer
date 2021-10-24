@@ -77,7 +77,7 @@ const Navbar = (props) => {
           $("#navigation").css("box-shadow", "0px 0px 30px rgb(0 0 0 / 10%)");
           // $(".navbar_img").css(
           //   "background-image",
-          //   "url(../../others/Bodhi.png)"
+          //   "url(../../others/Bodhi1.png)"
           // );
           $(".navbar-brand").css(
             "border-right",
@@ -173,7 +173,7 @@ const Navbar = (props) => {
             })}
             <li>
               <Link className="dropdown-item" to={`/dashboard/courses`}>
-                Xem thêm
+                Detail
               </Link>
             </li>
           </ul>
@@ -215,7 +215,7 @@ const Navbar = (props) => {
                 to={`/dashboard/home`}
                 style={{ paddingLeft: "0px" }}
               >
-                Trang chủ
+                Home
               </Link>
             </li>
             <li className="nav-item dropdown">
@@ -225,7 +225,7 @@ const Navbar = (props) => {
                 id="navbardrop"
                 data-toggle="dropdown"
               >
-                Dịch vụ
+                Service
               </a>
               {/* <!-- Dropdown Menu--> */}
               <ul className="dropdown-menu">
@@ -420,7 +420,7 @@ const Navbar = (props) => {
                 className="nav-link"
                 to={`/dashboard/aboutus`}
               >
-                Về chúng tôi
+                About us
               </Link>
             </li>
             <li className="nav-item">
@@ -436,7 +436,7 @@ const Navbar = (props) => {
                 className="nav-link"
                 to={`/dashboard/contactus`}
               >
-                Liên hệ
+                Contact
               </Link>
             </li>
             {authCtx.isLoggedIn ? (
@@ -501,7 +501,7 @@ const Navbar = (props) => {
               <li className="nav-item">
                 <i className="far fa-user" id="usericon"></i>
                 <Link action="push" className="nav-link" to={`/login`}>
-                  Đăng nhập&nbsp;/&nbsp;Đăng kí
+                  Login&nbsp;/&nbsp;Logout
                 </Link>
               </li>
             )}

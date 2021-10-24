@@ -65,28 +65,169 @@ const TopCourses = (props) => {
 
   return (
     <section className="course_sect">
-      <div className="container-fluid">
-        <h3>Browse Our Courses</h3>
-        <p>Cum doctus civibus efficiantur in imperdiet deterruisset.</p>
-        <div className="course_filter_tab">
-          <ul className="list-inline">
-            {props.category.map((cate, i) => {
-              // console.log("cateee", cate);
-
-              return (
-                <li className="list-inline-item" key={i}>
-                  <button
-                    className="filter-button"
-                    onClick={() => getTopCourse(cate)}
-                  >
-                    {cate.categoryName.toUpperCase()}
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="pricing-plans d-flex flex-column flex-lg-row my-auto">
+              <div class="plan options">
+                <div class="plan-info">
+                  <ul class="list-group first text-right">
+                    <li class="list-group-item"><strong>Shipments Per Month</strong> </li>
+                    <li class="list-group-item">All Selling Channels</li>
+                    <li class="list-group-item">Users</li>
+                    <li class="list-group-item">Branded Labels</li>
+                    <li class="list-group-item">Packing Slips</li>
+                    <li class="list-group-item">E-mail/Forum Support</li>
+                    <li class="list-group-item">Live Chat</li>
+                    <li class="list-group-item">Phone Support</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="plan">
+                <div class="plan-header gray">
+                  <h3>
+                    <span class="label">Starter</span>
+                    <div class="figure">
+                      <span class="amount">9</span>
+                    </div>
+                  </h3>
+                  <div class="button"><a href="/step1?starter/" class="btn btn-sm btn-secondary">Try It Free</a></div>
+                </div>
+                <div class="plan-info">
+                  <ul class="list-group">
+                    <li class="list-group-item">50</li>
+                    <li class="list-group-item">
+                      <i class="fas fa-check text-success fa-lg"></i>
+                    </li>
+                    <li class="list-group-item">
+                      1
+                    </li>
+                    <li class="list-group-item"><i class="fas fa-check text-success fa-lg"></i></li>
+                    <li class="list-group-item">Branded</li>
+                    <li class="list-group-item"><i class="fas fa-check text-success fa-lg"></i></li>
+                    <li class="list-group-item"><i class="fas fa-times text-danger fa-lg"></i></li>
+                    <li class="list-group-item"><i class="fas fa-times text-danger fa-lg"></i></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="plan">
+                <div class="plan-header bronze">
+                  <h3>
+                    <span class="label">Bronze</span>
+                    <div class="figure">
+                      <span class="amount">29</span>
+                    </div>
+                  </h3>
+                  <div class="button"><a href="/step1?bronze/" class="btn btn-secondary btn-sm ">Try It Free</a></div>
+                </div>
+                <div class="plan-info">
+                  <ul class="list-group">
+                    <li class="list-group-item">500</li>
+                    <li class="list-group-item">  <i class="fas fa-check text-success fa-lg"></i> </li>
+                    <li class="list-group-item">1</li>
+                    <li class="list-group-item"><i class="fas fa-check text-success fa-lg"></i></li>
+                    <li class="list-group-item">Branded</li>
+                    <li class="list-group-item"><i class="fas fa-check text-success fa-lg"></i></li>
+                    <li class="list-group-item"><i class="fas fa-times text-danger fa-lg"></i></li>
+                    <li class="list-group-item"><i class="fas fa-times text-danger fa-lg"></i></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="plan">
+                <div class="plan-header silver">
+                  <h3 class="panel-heading">
+                    <span class="label">Silver</span>
+                    <div class="figure">
+                      <span class="amount">49</span>
+                    </div>
+                  </h3>
+                  <div class="button"><a href="/step1?silver/" class="btn btn-secondary btn-sm">Try It Free</a></div>
+                </div>
+                <div class="plan-info">
+                  <ul class="list-group">
+                    <li class="list-group-item">1,500</li>
+                    <li class="list-group-item"><i class="fas fa-check text-success fa-lg"></i> </li>
+                    <li class="list-group-item">2</li>
+                    <li class="list-group-item"><i class="fas fa-check text-success fa-lg"></i></li>
+                    <li class="list-group-item">Customized</li>
+                    <li class="list-group-item"><i class="fas fa-check text-success fa-lg"></i></li>
+                    <li class="list-group-item"><i class="fas fa-check text-success fa-lg"></i></li>
+                    <li class="list-group-item"><i class="fas fa-times text-danger fa-lg"></i></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="plan popular">
+                <div class="plan-header gold">
+                  <h3 class="panel-heading">
+                    <span class="label">Gold</span>
+                    <div class="figure">
+                      <span class="amount">69</span>
+                    </div>
+                  </h3>
+                  <div class="button"><a href="/step1?gold/" class="btn btn-secondary btn-sm">Try It Free</a></div>
+                </div>
+                <div class="plan-info">
+                  <ul class="list-group">
+                    <li class="list-group-item">3,000</li>
+                    <li class="list-group-item"><i class="fas fa-check text-success fa-lg"></i> </li>
+                    <li class="list-group-item">3</li>
+                    <li class="list-group-item"><i class="fas fa-check text-success fa-lg"></i></li>
+                    <li class="list-group-item">Customized</li>
+                    <li class="list-group-item"><i class="fas fa-check text-success fa-lg"></i></li>
+                    <li class="list-group-item"><i class="fas fa-check text-success fa-lg"></i></li>
+                    <li class="list-group-item"><i class="fas fa-times text-danger fa-lg"></i></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="plan">
+                <div class="plan-header platinum">
+                  <h3 class="panel-heading">
+                    <span class="label">Platinum</span>
+                    <div class="figure">
+                      <span class="amount">99</span>
+                    </div>
+                  </h3>
+                  <div class="button"><a href="/step1?platinum/" class="btn btn-secondary btn-sm">Try It Free</a></div>
+                </div>
+                <div class="plan-info">
+                  <ul class="list-group">
+                    <li class="list-group-item">6,000</li>
+                    <li class="list-group-item">  <i class="fas fa-check text-success fa-lg"></i> </li>
+                    <li class="list-group-item">5</li>
+                    <li class="list-group-item"><i class="fas fa-check text-success fa-lg"></i></li>
+                    <li class="list-group-item">Customized</li>
+                    <li class="list-group-item"><i class="fas fa-check text-success fa-lg"></i></li>
+                    <li class="list-group-item"><i class="fas fa-check text-success fa-lg"></i></li>
+                    <li class="list-group-item"><i class="fas fa-times text-danger fa-lg"></i></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="plan">
+                <div class="plan-header ent last">
+                  <h3>
+                    <span class="label">Enterprise</span>
+                    <div class="figure">
+                      <span class="amount">159</span>
+                    </div>
+                  </h3>
+                  <div class="button"><a href="/step1?enterprise/" class="btn btn-secondary btn-sm">Try It Free</a></div>
+                </div>
+                <div class="plan-info">
+                  <ul class="list-group last">
+                    <li class="list-group-item">Unlimited</li>
+                    <li class="list-group-item"><i class="fas fa-check text-success fa-lg"></i></li>
+                    <li class="list-group-item">10</li>
+                    <li class="list-group-item"><i class="fas fa-check text-success fa-lg"></i></li>
+                    <li class="list-group-item">Customized</li>
+                    <li class="list-group-item"><i class="fas fa-check text-success fa-lg"></i></li>
+                    <li class="list-group-item"><i class="fas fa-check text-success fa-lg"></i></li>
+                    <li class="list-group-item"><i class="fas fa-check text-success fa-lg"></i></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="content row">{ui}</div>
       </div>
     </section>
   );

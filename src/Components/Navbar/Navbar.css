@@ -13,7 +13,7 @@
 .fixed-top {
   position: relative;
 }
-.navbar-expand-md .navbar-brand .navbar_img {
+.navbar_img {
   background-image: url("../../others/Bodhi1.png");
   width: 96px;
   height: 50px;
