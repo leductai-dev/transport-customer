@@ -11,9 +11,10 @@ const Category = (props) => {
   return (
     <section className="crs_sect" id="ourcourse">
       <div className="container-fluid">
-        <h3>Via Categories Courses</h3>
+        <h3>Dịch vụ của chúng tôi</h3>
         <p className="crs_title">
-          Cum doctus civibus efficiantur in imperdiet deterruisset.
+          Các Giải pháp Vận chuyển của chúng tôi hỗ trợ doanh nghiệp bạn duy trì các mức dịch vụ cao và đáng tin cậy, đồng thời đạt được khả năng theo dõi toàn bộ quá trình vận chuyển sản phẩm. Đồng thời chúng tôi hỗ trợ cắt giảm chi phí vận chuyển. Đội ngũ của chúng tôi kết hợp lý tưởng các hệ thống, các hãng vận chuyển và các nguồn lực để đáp ứng nhu cầu cụ thể của bạn.
+
         </p>
         <div className="row">
           {props.category.map((cate, i) => {
@@ -114,7 +115,7 @@ const Category = (props) => {
         </div> */}
         {/* <form action="courses.html" method="get"> */}
         <Link className="crs_btn" to={`${props.match.url}/courses`}>
-          View All Courses
+          Xem tất cả
         </Link>
         {/* </form> */}
       </div>

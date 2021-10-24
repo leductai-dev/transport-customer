@@ -185,7 +185,7 @@ const Footer = (props) => {
           <div className="row">
             <div className="col-lg-6 offset-lg-3">
               <div className="copyright-widget text-center">
-                <p>Copyright Merit Bodhi © 2021. All Rights Reserved.</p>
+                <p>Copyright TSMS © 2021. All Rights Reserved.</p>
               </div>
             </div>
           </div>

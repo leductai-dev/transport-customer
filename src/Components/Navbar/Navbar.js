@@ -73,12 +73,12 @@ const Navbar = (props) => {
     $(document).ready(function () {
       $(window).scroll(function () {
         if ($(window).scrollTop() > 50) {
-          $(".fixed-top").css("background-color", "#fff");
+          $(".fixed-top").css({ "background-color": "rgb(255 255 255 / 51%)", "backdrop-filter": "blur(10px)" });
           $("#navigation").css("box-shadow", "0px 0px 30px rgb(0 0 0 / 10%)");
-          $(".navbar_img").css(
-            "background-image",
-            "url(../../others/Bodhi1.png)"
-          );
+          // $(".navbar_img").css(
+          //   "background-image",
+          //   "url(../../others/Bodhi.png)"
+          // );
           $(".navbar-brand").css(
             "border-right",
             "1px solid rgba(0, 0, 0, 0.2)"
@@ -173,7 +173,7 @@ const Navbar = (props) => {
             })}
             <li>
               <Link className="dropdown-item" to={`/dashboard/courses`}>
-                View More
+                Xem thêm
               </Link>
             </li>
           </ul>
@@ -215,7 +215,7 @@ const Navbar = (props) => {
                 to={`/dashboard/home`}
                 style={{ paddingLeft: "0px" }}
               >
-                Home
+                Trang chủ
               </Link>
             </li>
             <li className="nav-item dropdown">
@@ -225,7 +225,7 @@ const Navbar = (props) => {
                 id="navbardrop"
                 data-toggle="dropdown"
               >
-                Courses
+                Dịch vụ
               </a>
               {/* <!-- Dropdown Menu--> */}
               <ul className="dropdown-menu">
@@ -282,98 +282,7 @@ const Navbar = (props) => {
                 </li>
               </ul>
             </li>
-            <li className="nav-item dropdown">
-              <Link
-                action="push"
-                className="nav-link"
-                to={`/dashboard/institution`}
-              >
-                Institutes
-              </Link>
-              {/* <a
-                className="nav-link dropdown-toggle"
-                // id="navigationitem2"
-                href="#institution"
-                id="navbardrop"
-                data-toggle="dropdown"
-              >
-                Institutes
-              </a> */}
-              {/* <!-- Dropdown Menu--> */}
-              {/* <ul className="dropdown-menu">
-                <li>
-                  <a className="dropdown-item" href="institution.html">
-                    IAS<i className="fas fa-chevron-right"></i>
-                  </a>
-                  <ul className="sub-menu">
-                    <li>
-                      <a className="dropdown-item" href="#institution.html">
-                        Sub Item
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#institution.html">
-                        Sub Item
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="institution.html">
-                    IES<i className="fas fa-chevron-right"></i>
-                  </a>
-                  <ul className="sub-menu">
-                    <li>
-                      <a className="dropdown-item" href="institution.html">
-                        Sub Item2
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="institution.html">
-                        Sub Item2
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="institution.html">
-                    NEET
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="institution.html">
-                    GATE
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="institution.html">
-                    RRB
-                  </a>
-                </li>
-                <li> */}
-              {/* <a
-                    className="dropdown-item"
-                    href={`${props.match.url}/institution`}
-                  >
-                    View All
-                  </a> */}
-              {/* <div
-                    className="dropdown-item"
-                    onClick={() => pushHandler("/dashboard/institution")}
-                    style={{ paddingLeft: "0px" }}
-                  >
-                    View All
-                  </div> */}
-              {/* <Link
-                    action="push"
-                    className="dropdown-item"
-                    to={`/dashboard/institution`}
-                  >
-                    View All
-                  </Link>
-                </li>
-              </ul> */}
-            </li>
+
             {/* <!-- Dropdown --> */}
             <li className="nav-item dropdown">
               {/* <a
@@ -511,7 +420,7 @@ const Navbar = (props) => {
                 className="nav-link"
                 to={`/dashboard/aboutus`}
               >
-                Aboutus
+                Về chúng tôi
               </Link>
             </li>
             <li className="nav-item">
@@ -527,7 +436,7 @@ const Navbar = (props) => {
                 className="nav-link"
                 to={`/dashboard/contactus`}
               >
-                Contact
+                Liên hệ
               </Link>
             </li>
             {authCtx.isLoggedIn ? (
@@ -565,12 +474,12 @@ const Navbar = (props) => {
                     type="button"
                     className="btn"
                     onClick={overlayHandler}
-                    // onClick={() => {
-                    //   // take it after, just for testing
-                    //   props.history.push("/userDashboard/myProfile");
-                    //   console.log("overlay");
-                    //   setIsOverlay((prevState) => !prevState);
-                    // }}
+                  // onClick={() => {
+                  //   // take it after, just for testing
+                  //   props.history.push("/userDashboard/myProfile");
+                  //   console.log("overlay");
+                  //   setIsOverlay((prevState) => !prevState);
+                  // }}
                   >
                     <img
                       className="img-fluid"
@@ -592,7 +501,7 @@ const Navbar = (props) => {
               <li className="nav-item">
                 <i className="far fa-user" id="usericon"></i>
                 <Link action="push" className="nav-link" to={`/login`}>
-                  Login&nbsp;/&nbsp;Register
+                  Đăng nhập&nbsp;/&nbsp;Đăng kí
                 </Link>
               </li>
             )}

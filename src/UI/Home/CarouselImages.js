@@ -11,7 +11,7 @@ const CarouselImages = () => {
               <div className="carousel-item active">
                 <img
                   className="img-fluid"
-                  src="/images/bg.jpg"
+                  src="/images/Banner-truck.jpg"
                   alt="Carousel_Image"
                 />
                 <div className="img_overlay"></div>
@@ -21,13 +21,13 @@ const CarouselImages = () => {
                     src="/images/hicon1.png"
                     alt="Icon"
                   />
-                  <h3>You Can Learn Anything</h3>
+                  <h3>Give us the hardest orders</h3>
                 </div>
               </div>
               <div className="carousel-item">
                 <img
                   className="img-fluid"
-                  src="/images/bg2.jpg"
+                  src="/images/Banner-truck2.jpg"
                   alt="Carousel_Image"
                 />
                 <div className="img_overlay"></div>
@@ -43,7 +43,7 @@ const CarouselImages = () => {
               <div className="carousel-item">
                 <img
                   className="img-fluid"
-                  src="/images/bg3.jpg"
+                  src="/images/Banner-truck3.jpg"
                   alt="Carousel_Image"
                 />
                 <div className="img_overlay"></div>
@@ -68,12 +68,11 @@ const CarouselImages = () => {
           </div>
           <div className="over_content">
             <p>
-              Choose From A Range Of <span>Online Courses</span>
+              GIẢI PHÁP VẬN TẢI ĐA PHƯƠNG THỨC <span>THÍCH ỨNG TÌNH HÌNH DỊCH COVID-19 </span>
             </p>
             {/* <AlgoliaSearch /> */}
             <p className="under_q">
-              Technology is bringing a massive way of evolution on Learning
-              Things on different ways.
+              Technology is bringing a massive way of Shipping goods quickly and economically.
             </p>
           </div>
           {/* <!-- Go to section --> */}

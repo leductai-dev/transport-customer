@@ -12,7 +12,7 @@ const Registration = (props) => {
     } else {
       ui = (
         <Link className="reg_btn" to="/login">
-          Get Started Now
+          Bắt đầu ngay
         </Link>
       );
     }
@@ -23,11 +23,9 @@ const Registration = (props) => {
       <section className="reg_sect">
         <div className="container-fluid">
           <div className="inner_container">
-            <p>STARTING ONLINE LEARNING</p>
+            <p>Tạo đơn hàng ngay bây giờ</p>
             <h3>
-              ENHANCE YOUR SKILLS WITH BEST
-              <br />
-              ONLINE COURSES
+              Tính toán mức giá và sự lựa chọn cho đơn hàng của bạn
             </h3>
             {/* <form action="#blankpage" method="get"> */}
             {ui}
