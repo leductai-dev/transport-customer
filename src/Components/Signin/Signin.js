@@ -236,7 +236,7 @@ const Signin = (props) => {
         )}
         <div className="left-slide">
           <div class="left-bg" className={classes.leftbg1}>
-            <h1 style={{ left: "16%" }}>Staff Login</h1>
+            <h1 style={{ left: "16%" }}>Admin Login</h1>
             <p style={{ marginLeft: "30px" }}>
               Not a Staff ? Click Here
 
@@ -343,7 +343,7 @@ const Signin = (props) => {
           <div className="container-fluid">
             <div className="container ">
               <form action="#">
-                <div className="title">Staff Login</div>
+                <div className="title">Addmin Login</div>
                 <div className="input-box underline">
                   <input
                     type="text"

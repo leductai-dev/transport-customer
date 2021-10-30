@@ -8,6 +8,9 @@ import Institution from "./Institution/Institution";
 import Exams from "./Exams/Exams";
 import Aboutus from "./Aboutus/Aboutus";
 import Contactus from "./Contact/Contactus";
+import Order from "./Order";
+import MyOrders from "./MyOrder";
+
 import Footer from "./Footer/Footer";
 import Scroller from "../UI/Scroller";
 // import SingleCourseDetails from "./Courses/SingleCoursedt/SingleCourseDetails";
@@ -39,16 +42,7 @@ const Dashboard = (props) => {
     if (props.history.location.pathname === "/dashboard") {
       props.history.push("/dashboard/home");
     }
-    db.collection("category")
-      .doc("categories")
-      .get()
-      .then((doc) => {
-        setCategory(doc.data().catDetails);
-        sessionStorage.setItem(
-          "categories",
-          JSON.stringify(doc.data().catDetails)
-        );
-      });
+   
     setTimeout(() => {
       setloading(true);
     }, 2000);
@@ -167,6 +161,12 @@ const Dashboard = (props) => {
                 </Route>
                 <Route path={`/dashboard/contactus`}>
                   <Contactus {...props} />
+                </Route>
+                <Route path={`/dashboard/order`}>
+                  <Order {...props} />
+                </Route>
+                <Route path={`/dashboard/myorders`}>
+                  <MyOrders {...props} />
                 </Route>
               </Switch>
             </CoursesContextProvider>

@@ -1,35 +1,10 @@
-import { db, firebase } from "../../Services/firebase";
 
 const getFilterOptions = (filter) => {
-  db.collection("category")
-    .doc("categories")
-    .get()
-    .then((doc) => {
-      console.log("categories", doc.data().catDetails);
-      filter(doc.data().catDetails);
-    })
-    .catch((e) => console.log(e));
+ 
 };
 
 const getCourses = (courses, subcatId) => {
-  db.collection("subCategories")
-    .doc(subcatId)
-    .collection("courses")
-    .where("status", "==", "Verified")
-    // .limit(9)
-    .get()
-    .then((data) => {
-      // console.log("9999999", data);
-
-      let fromCache = data.metadata.fromCache;
-      let list = [];
-      data.forEach((doc) => {
-        // console.log(doc.data());
-        list.push(doc.data());
-      });
-      courses(list, fromCache);
-    })
-    .catch((e) => console.log("/////", e));
+ 
 };
 
 const addBookmark = (user, course) => {
@@ -43,15 +18,7 @@ const addBookmark = (user, course) => {
   };
   bookmarks[index] = updatedCourse;
 
-  console.log("user in add bookmark", user);
-  db.collection("students")
-    .doc(user.id)
-    .collection("userCourseDetails")
-    .doc("courseDetails")
-    .update({
-      bookmarks: bookmarks
-    })
-    .then(() => console.log("successfully added bookmark"));
+ 
 };
 
 const removeBookmark = (user, course) => {
@@ -59,28 +26,13 @@ const removeBookmark = (user, course) => {
   let filteredBookmarks = bookmarks.filter((b) => {
     return b.id !== course.id;
   });
-  db.collection("students")
-    .doc(user.id)
-    .collection("userCourseDetails")
-    .doc("courseDetails")
-    .update({
-      bookmarks: filteredBookmarks
-    })
-    .then(() => console.log("successfully removed bookmark"));
+ 
 };
 
 const buyCourse = (user, course, subcategoryId, price, setOngoingCourse) => {
   // example data, change after
   subcategoryId = subcategoryId.trim();
-  let courseRef = db
-    .collection("subCategories")
-    .doc(subcategoryId)
-    .collection("courses")
-    .doc(course.id);
-
-  courseRef.update({
-    noOfStudents: firebase.firestore.FieldValue.increment(1)
-  });
+  
   // to add 30days to a current date
   // var date = new Date(); // Now
   // date.setDate(date.getDate() + 30); // Set now + 30 days as the new date
@@ -135,37 +87,8 @@ const buyCourse = (user, course, subcategoryId, price, setOngoingCourse) => {
   let ongoingCourses = [...user.ongoingCourses, data];
   let orders = [...user.orders, orderDet];
   // console.log("buy course", user, ongoingCourses, orders);
-  db.collection("students")
-    .doc(user.id)
-    .collection("userCourseDetails")
-    .doc("courseDetails")
-    .update({
-      ongoingCourses: ongoingCourses,
-      orders: orders
-    })
-    .then(() => {
-      setOngoingCourse({
-        ongoingCourse: data,
-        order: orderDet
-      });
-      // let orders = user.orders;
-      // db.collection("students").doc(user.id).update({
-      //   orders: firebase.firestore.FieldValue.arrayUnion(data)
-      // }).then().catch();
-      // increment noOfStudents in institute
-      db.collection("institute")
-        .doc(course.instituteId)
-        .update({
-          noOfStudents: firebase.firestore.FieldValue.increment(1)
-        })
-        .then(() => console.log("update"))
-        .catch((e) => console.log(e));
-    })
-    .catch((e) => {
-      // if 1mb limit error, then create new doc here
-      // add the above data to that document
-      console.log(e);
-    });
+  
+   
 };
 
 const removeExpiredCourse = (authCtx, ongoingCourse) => {
@@ -180,18 +103,7 @@ const removeExpiredCourse = (authCtx, ongoingCourse) => {
     ongoingCourses: filteredOngoingCourses
   };
 
-  db.collection("students")
-    .doc(user.id)
-    .collection("userCourseDetails")
-    .doc("courseDetails")
-    .update({
-      ongoingCourses: filteredOngoingCourses
-    })
-    .then(() => {
-      authCtx.setUser(user);
-    })
-    .catch((e) => console.log(e));
-  // console.log("removeExpiryCourse", user);
+
 };
 
 export {

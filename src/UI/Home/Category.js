@@ -31,9 +31,9 @@ const Category = (props) => {
                 <div className="img_overlay"></div>
                 <div className="crs_caption">
                   <p>
-                    <b>{cate.categoryName.toUpperCase()}</b>
+                    <b>Service</b>
                   </p>
-                  <p>Over {cate.noOfCourses}+ courses</p>
+                  <p>Shipping service to 63 provinces</p>
                 </div>
               </div>
             );

@@ -20,9 +20,7 @@ const StudentsSignup = (props) => {
   });
 
   useEffect(() => {
-    alert(
-      "Enter Correct Email Address. We will send password recovery and sensitive information through mail."
-    );
+    
   }, []);
 
   const changeHandler = (event) => {
@@ -189,7 +187,7 @@ const StudentsSignup = (props) => {
       >
         <div className="container-fluid">
           <div className="container">
-            <div className="title">Student signup</div>
+            <div className="title">Signup</div>
             <div className="content">
               <form name="fname" onSubmit={signUpAuth}>
                 {error && <Alert variant="danger">{error}</Alert>}
