@@ -114,7 +114,7 @@ const Testimonal = () => {
       <section className="testim" id="testim">
         <div className="container">
           <div className="header">
-            <h1>What People Say</h1>
+            <h1>Khách hàng</h1>
           </div>
           <div className="background"></div>
           <div className="testim-cover">
@@ -139,7 +139,7 @@ const Testimonal = () => {
                   <div className="img">
                     <img src="/images/team5.jpg" alt="" />
                   </div>
-                  <h2>Lorem P. Ipsum</h2>
+                  <h2>Ngô Phan Phúc</h2>
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                     do eiusmod tempor incididunt ut labore et dolore magna
@@ -152,7 +152,7 @@ const Testimonal = () => {
                   <div className="img">
                     <img src="/images/team6.jpg" alt="" />
                   </div>
-                  <h2>Mr. Lorem Ipsum</h2>
+                  <h2>Nguyễn Hoài Trung</h2>
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                     do eiusmod tempor incididunt ut labore et dolore magna
@@ -165,7 +165,7 @@ const Testimonal = () => {
                   <div className="img">
                     <img src="/images/team7.jpg" alt="" />
                   </div>
-                  <h2>Lorem Ipsum</h2>
+                  <h2>Lê Huỳnh Đức</h2>
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                     do eiusmod tempor incididunt ut labore et dolore magna
@@ -178,7 +178,7 @@ const Testimonal = () => {
                   <div className="img">
                     <img src="/images/team8.jpg" alt="" />
                   </div>
-                  <h2>Lorem De Ipsum</h2>
+                  <h2>Phan Ngọc Anh</h2>
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                     do eiusmod tempor incididunt ut labore et dolore magna
@@ -191,7 +191,7 @@ const Testimonal = () => {
                   <div className="img">
                     <img src="/images/team5.jpg" alt="" />
                   </div>
-                  <h2>Ms. Lorem R. Ipsum</h2>
+                  <h2>Trương Mỹ Nhung</h2>
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                     do eiusmod tempor incididunt ut labore et dolore magna

@@ -5,12 +5,16 @@ import "../../styles.css";
 const Footer = (props) => {
   return (
     <>
+      <div id="call-me" className="d-flex " style={{ width: "50px", height: "50px", position: "fixed", backgroundColor: "#cbe54f", bottom: "20px", left: "30px", zIndex: "2", cursor: "pointer", justifyContent: "center", alignItems: "center" }} >
+        <a href="tel:0847247099">
+          <i class="fas fa-phone-alt text-white"></i></a>
+      </div>
       <section className="footer_one">
         <div className="container-fluid">
           <div className="row">
             <div className="col-sm-6 col-md-4 col-md-3 col-lg-3">
               <div className="footer_contact_widget">
-                <h4>CONTACT</h4>
+                <h4>LIÊN LẠC</h4>
                 <p>254 Nguyen Van Linh </p>
                 <p>Da Nang , Viet Nam.</p>
                 <p>0347247099</p>
@@ -19,26 +23,23 @@ const Footer = (props) => {
             </div>
             <div className="col-sm-6 col-md-4 col-md-3 col-lg-2">
               <div className="footer_company_widget">
-                <h4>COMPANY</h4>
+                <h4>CÔNG TY</h4>
                 <ul className="list-unstyled">
                   <li>
-                    <a href="#">About Us</a>
+                    <a href="#">Trang chủ</a>
                   </li>
                   <li>
-                    <a href="">Contact Us</a>
+                    <a href="">Liên hệ</a>
                   </li>
                   <li>
-                    <a href="#">Institution</a>
-                  </li>
-                  <li>
-                    <a href="#">Become a Teacher</a>
+                    <a href="#">Về chúng tôi</a>
                   </li>
                 </ul>
               </div>
             </div>
             <div className="col-sm-6 col-md-4 col-md-3 col-lg-2">
               <div className="footer_program_widget">
-                <h4>COURSES</h4>
+                <h4>DỊCH VỤ</h4>
                 <ul className="list-unstyled">
                   {props.category !== null &&
                     props.category !== undefined &&
@@ -62,17 +63,12 @@ const Footer = (props) => {
                 <h4>SUPPORT</h4>
                 <ul className="list-unstyled">
                   <li>
-                    <a href="#">Documentation</a>
+                    <a href="#">Tài liệu</a>
                   </li>
                   <li>
-                    <a href="#">Forums</a>
+                    <a href="#">Diễn đàn</a>
                   </li>
-                  <li>
-                    <a href="#">Language Packs</a>
-                  </li>
-                  <li>
-                    <a href="#">Release Status</a>
-                  </li>
+
                 </ul>
               </div>
             </div>
@@ -109,37 +105,17 @@ const Footer = (props) => {
 
       <section className="footer_middle_area">
         <div className="container-fluid">
-          <div className="row">
-            <div className="col-sm-4 col-md-3 col-lg-3 col-xl-2 p15">
+          <div className="d-flex flex-sm-row flex-column justify-content-between">
+            <div className="p15">
               <div className="logo-widget home1">
                 <div className="navbar_img"></div>
 
               </div>
             </div>
-            <div className="col-sm-8 col-md-5 col-lg-6 col-xl-6 p25 brdr_left_right">
-              <div className="footer_menu_widget">
-                <ul>
-                  <li className="list-inline-item">
-                    <a href="#">Home</a>
-                  </li>
-                  <li className="list-inline-item">
-                    <a href="#">Privacy</a>
-                  </li>
-                  <li className="list-inline-item">
-                    <a href="#">Terms</a>
-                  </li>
-                  <li className="list-inline-item">
-                    <a href="#">Sitemap</a>
-                  </li>
-                  <li className="list-inline-item">
-                    <a href="#">Purchase</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className="col-sm-12 col-md-4 col-lg-3 col-xl-4 p15">
+
+            <div className=" p15 mr-auto mr-sm-0">
               <div className="footer_social_widget">
-                <ul>
+                <ul className="p-0">
                   <li className="list-inline-item">
                     <a href="#">
                       <i className="fa fa-facebook"></i>

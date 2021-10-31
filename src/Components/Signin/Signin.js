@@ -236,17 +236,17 @@ const Signin = (props) => {
         )}
         <div className="left-slide">
           <div class="left-bg" className={classes.leftbg1}>
-            <h1 style={{ left: "16%" }}>Admin Login</h1>
+            <h1 style={{ left: "16%" }}>Nhân viên đăng nhập</h1>
             <p style={{ marginLeft: "30px" }}>
-              Not a Staff ? Click Here
+              Bạn không phải nhân viên ? Nhấn đây
 
             </p>
             <p></p>
           </div>
           <div class="left-bg" className={classes.leftbg2}>
-            <h1>Customer Login</h1>
+            <h1>Khách hàng đăng nhập</h1>
             <p style={{ marginLeft: "60px" }}>
-              Not a customer ? Click Here
+              Bạn không phải người dùng ? Nhấn đây
 
             </p>
             <p></p>
@@ -256,7 +256,7 @@ const Signin = (props) => {
           <div className="container-fluid">
             <div className="container">
               <form onSubmit={submitHandler}>
-                <div className="title">Customer Login</div>
+                <div className="title">Đăng nhập</div>
                 {error && (
                   <>
                     <Alert
@@ -282,7 +282,7 @@ const Signin = (props) => {
                 <div className="input-box underline">
                   <input
                     type="email"
-                    placeholder="Enter Your Email..."
+                    placeholder="Nhập địa chỉ Email..."
                     id="email"
                     name="email"
                     required
@@ -294,7 +294,7 @@ const Signin = (props) => {
                 <div className="input-box">
                   <input
                     type="password"
-                    placeholder="Enter Your Password..."
+                    placeholder="Nhập Password..."
                     id="password"
                     name="password"
                     required
@@ -312,12 +312,12 @@ const Signin = (props) => {
               </p>
               <p className="subtitle">
                 <button type="button" onClick={() => setForgotModal(true)}>
-                  Forget Password
+                  Quên mật khẩu
                 </button>
               </p>
               <p className="subtitle">
-                Don't have an account?
-                <Link to="/StudentsSignup">sign Up</Link>
+                Bạn chưa có tài khoản?
+                <Link to="/StudentsSignup">Đăng ký</Link>
                 {/* <a href="/StudentsSignup">sign Up</a> */}
               </p>
               {/* <div className="social-login">
@@ -343,11 +343,11 @@ const Signin = (props) => {
           <div className="container-fluid">
             <div className="container ">
               <form action="#">
-                <div className="title">Addmin Login</div>
+                <div className="title">Admin Login</div>
                 <div className="input-box underline">
                   <input
                     type="text"
-                    placeholder="Type Username or Email"
+                    placeholder="Nhập địa chỉ Email..."
                     id="usem"
                     required
                   />
@@ -356,7 +356,7 @@ const Signin = (props) => {
                 <div className="input-box">
                   <input
                     type="password"
-                    placeholder="Enter Your Password"
+                    placeholder="Nhập Password"
                     id="pass"
                     required
                   />
@@ -375,7 +375,7 @@ const Signin = (props) => {
                 <span>or</span>
               </p>
               <p className="subtitle">
-                Don't have an account? <a href="#Staffsignup"> sign Up</a>
+                Bạn chưa có tài khoản? <a href="#Staffsignup"> Đăng ký</a>
               </p>
             </div>
           </div>

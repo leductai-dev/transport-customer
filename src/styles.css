@@ -371,6 +371,7 @@ body {
 }
 /*=========================*/
 .home_sect .scrollbtn {
+  z-index: 2;
   position: absolute;
   display: none;
   margin: auto;
