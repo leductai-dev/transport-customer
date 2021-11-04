@@ -28,6 +28,7 @@ const MyOrders = () => {
   return (
     <>
       {/* section down where it should come */}
+
       <section
         className="navbar_sect"
         style={{ backgroundImage: "url(/images/bg5.jpg)" }}
@@ -53,6 +54,7 @@ const MyOrders = () => {
                 <th scope="col">Ngày</th>
                 <th scope="col">Chi trả</th>
                 <th scope="col">Trạng thái</th>
+                <th scope="col">Chi tiết</th>
               </tr>
             </thead>
             <tbody>
@@ -62,6 +64,8 @@ const MyOrders = () => {
                 <td>01/01/2021</td>
                 <td>1000000</td>
                 <td><span class="badge badge-success">Thành công</span></td>
+                <td><button class="btn btn-primary">Edit</button></td>
+
               </tr>
               <tr>
                 <th scope="row">2x09</th>
@@ -69,6 +73,7 @@ const MyOrders = () => {
                 <td>01/07/2021</td>
                 <td>1700000</td>
                 <td><span class="badge badge-danger">Thất bại</span></td>
+                <td><button class="btn btn-primary">Edit</button></td>
 
               </tr>
               <tr>
@@ -77,6 +82,8 @@ const MyOrders = () => {
                 <td>14/10/2021</td>
                 <td>5000000</td>
                 <td><span class="badge badge-success">Thành công</span></td>
+                <td><button class="btn btn-primary">Edit</button></td>
+
               </tr>
             </tbody>
           </table>
