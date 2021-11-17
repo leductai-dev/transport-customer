@@ -7,11 +7,13 @@ import { app } from "../../firebaseConfig";
 import { v4 as uuidv4 } from "uuid";
 import ImageUploading from "react-images-uploading";
 import axios from "axios";
+import {useSelector} from 'react-redux'
 
 const Order = () => {
     const form = useRef();
     const [overlay, setOverlay] = useState(false);
     const [images, setImages] = React.useState([]);
+    const customer = useSelector((state) => state.user);
 
     // const db_Transactions = app.database().ref().child("/system/transactions/");
     // db_Transactions.on("value", (snap) => {
@@ -141,6 +143,10 @@ const Order = () => {
             //         // .required("Required!")
         }),
         onSubmit: (values) => {
+            if(!customer.currentUser.customerId){
+                alert("Vui lòng đăng nhập!")
+                return
+            }
             const text = ["A","S","Q","T","P","N","T","H"];
             const transactionId = uuidv4();
             const transportCode = `${text[Math.floor(Math.random() * 8)]}${
@@ -180,7 +186,7 @@ const Order = () => {
                 const transaction = {
                     transactionId,
                     transportCode,
-                    customerId: uuidv4(), //==> need to change
+                    customerId: customer.currentUser.customerId , 
                     initialTime: Date.now(),
                     note,
                     shippingInfo: {
@@ -214,8 +220,6 @@ const Order = () => {
                 alert("Có lỗi xảy ra! Vui lòng thử lại.");  
                 throw errors 
             });
-          
-           
          
         },
     });

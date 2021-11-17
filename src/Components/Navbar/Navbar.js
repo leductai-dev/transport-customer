@@ -3,75 +3,12 @@ import { Link } from "react-router-dom";
 import $ from "jquery";
 import AuthContext from "../../Context/auth-context";
 import "./Navbar.css";
-const Overlay = (props) => {
-    const logoutHandler = () => {
-        props.authCtx.logout();
-        // localStorage.removeItem("userId");
-    };
+import {useSelector} from 'react-redux'
 
-    return (
-        <div className="overlay">
-            <div className="header">
-                <img
-                    className="img-fluid"
-                    src={
-                        props.user === null
-                            ? "/images/4.jpg"
-                            : props.user.photoUrl
-                    }
-                    alt="userprofile"
-                />
-                <p>
-                    <span className="usern" id="username">
-                        {props.user.name}
-                    </span>
-                    <br />
-                    <small id="usermail">{props.user.email}</small>
-                </p>
-            </div>
-            <ul className="list">
-                <li className="list-item">
-                    <Link className="list-link" to="/userDashboard/myProfile">
-                        My Profile
-                    </Link>
-                    <i className="far fa-id-badge"></i>
-                </li>
-                <li className="list-item">
-                    <Link className="list-link" to="/userDashboard/mycourses">
-                        My Courses
-                    </Link>
-                    <i className="fas fa-tv"></i>
-                </li>
-                <li className="list-item">
-                    <Link className="list-link" to="/userDashboard/myorder">
-                        Purchase History
-                    </Link>
-                    <i className="fas fa-history"></i>
-                </li>
-                {/* <li className="list-item">
-          <Link className="list-link" to="/userDashboard/myProfile">
-            Help
-          </Link>
-          <i className="far fa-question-circle"></i>
-        </li> */}
-                <li className="list-item">
-                    <button
-                        type="button"
-                        className="list-link"
-                        style={{ background: "transparent" }}
-                        onClick={logoutHandler}
-                    >
-                        Logout
-                    </button>
-                    <i className="fas fa-sign-out-alt"></i>
-                </li>
-            </ul>
-        </div>
-    );
-};
 
 const Navbar = (props) => {
-    // console.log("navcate", props.category);
+    const customer = useSelector((state) => state.user);
+
     if (window.matchMedia("(min-width: 768px)").matches) {
         $(document).ready(function () {
             $(window).scroll(function () {
@@ -123,15 +60,6 @@ const Navbar = (props) => {
                 }
             });
 
-            // Mobile Device
-            // $("nav.navbar div.collapse ul.navbar-nav li.dropdown").hover(
-            //   function () {
-            //     $(this).find(".dropdown-menu").slideToggle(300);
-            //   },
-            //   function () {
-            //     $(this).find(".dropdown-menu").slideToggle(100);
-            //   }
-            // );
         });
     }
     // const history = useHistory();
@@ -274,16 +202,7 @@ const Navbar = (props) => {
                             </ul>
                         </li>
 
-                        {/* <!-- Dropdown --> */}
-
                         <li className="nav-item">
-                            {/* <div
-                className="nav-link"
-                onClick={() => pushHandler("/dashboard/aboutus")}
-                style={{ paddingLeft: "0px" }}
-              >
-                Aboutus
-              </div> */}
                             <Link
                                 action="push"
                                 className="nav-link"
@@ -293,13 +212,6 @@ const Navbar = (props) => {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            {/* <div
-                className="nav-link"
-                onClick={() => pushHandler("/dashboard/contactus")}
-                style={{ paddingLeft: "0px" }}
-              >
-                Contact
-              </div> */}
                             <Link
                                 action="push"
                                 className="nav-link"
@@ -309,13 +221,7 @@ const Navbar = (props) => {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            {/* <div
-                className="nav-link"
-                onClick={() => pushHandler("/dashboard/contactus")}
-                style={{ paddingLeft: "0px" }}
-              >
-                Contact
-              </div> */}
+                           
                             <Link
                                 action="push"
                                 className="nav-link"
@@ -324,7 +230,7 @@ const Navbar = (props) => {
                               Đơn của tôi
                             </Link>
                         </li>
-                        {authCtx.isLoggedIn ? (
+                        {customer.currentUser.customerId ? (
                             <>
                                 <li className="nav-item">
                                     <button
@@ -333,61 +239,39 @@ const Navbar = (props) => {
                                         style={{
                                             background: "transparent",
                                             border: "none",
+                                            padding: '15px 20px 24px'
+                                        }}
+                                        onClick={authCtx.logout}
+                                    >
+                                        Theo dõi
+                                    </button> 
+                                </li>
+                                <li className="nav-item">
+                                    <button
+                                        type="button"
+                                        className="nav-link"
+                                        style={{
+                                            background: "transparent",
+                                            border: "none",
+                                            padding: '15px 20px 24px'
                                         }}
                                         onClick={authCtx.logout}
                                     >
                                         Logout
                                     </button>
                                 </li>
-                                <li className="nav-item">
-                                    <Link
-                                        className="nav-link"
-                                        data-toggle="tooltip"
-                                        data-placement="bottom"
-                                        title="View Cart !"
-                                        to="/userDashboard/mybookmarks"
-                                    >
-                                        <i class="fas fa-heart"></i>
-                                    </Link>
-                                </li>
-                                <li className="prfl_img">
-                                    <Link
-                                        action="push"
-                                        className="nav-link"
-                                        to={`/userDashboard/myProfile`}
-                                    >
-                                        My Profile
-                                    </Link>
-                                    <button
+                                <button
                                         type="button"
-                                        className="btn"
-                                        onClick={overlayHandler}
-                                        // onClick={() => {
-                                        //   // take it after, just for testing
-                                        //   props.history.push("/userDashboard/myProfile");
-                                        //   console.log("overlay");
-                                        //   setIsOverlay((prevState) => !prevState);
-                                        // }}
+                                        className="nav-link"
+                                        style={{
+                                            background: "transparent",
+                                            border: "none",
+                                            padding: '15px 20px 24px'
+                                        }}
+                                        onClick={authCtx.logout}
                                     >
-                                        <img
-                                            className="img-fluid"
-                                            src={
-                                                user === null
-                                                    ? "/images/4.jpg"
-                                                    : user.photoUrl
-                                            }
-                                            alt="userprofile"
-                                        />
+                                        Chào, {customer?.currentUser?.name}
                                     </button>
-                                    {isOverlay === true ? (
-                                        <Overlay
-                                            logout={props.logout}
-                                            userDetail={props.userDetail}
-                                            authCtx={authCtx}
-                                            user={user}
-                                        />
-                                    ) : null}
-                                </li>
                             </>
                         ) : (
                             <li className="nav-item">
