@@ -7,14 +7,14 @@ const Aboutus = () => {
       {/* section down where it should come */}
       <section
         className="navbar_sect"
-        style={{ backgroundImage: "url(/images/bg6.jpg)" }}
+        style={{ backgroundImage: "url(/images/bg6.jpg)", backgroundPosition: "center" }}
       >
         <div className="contact_sect">
           <div className="container-fluid">
             <div className="inner_container">
-              <h1>ABOUT US</h1>
+              <h1>VỀ CHÚNG TÔI</h1>
               <p>
-                <Link to="/home">Home</Link>&ensp;/&ensp;Contact Us
+                <Link to="/home">Trang chủ</Link>&ensp;/&ensp;Liên lạc
               </p>
             </div>
           </div>
@@ -25,24 +25,16 @@ const Aboutus = () => {
           <div className="row m-0 p20">
             {/* <!---- Column Left ------> */}
             <div className="col-sm-6 col-md-6 col-lg-6 col-xl-6">
-              <h3>Our Values</h3>
+              <h3>Sứ mệnh của chúng tôi</h3>
               <p>
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                accusantium laudantium, totam rem aperiam, eaque ipsa quae ab
-                illo inventore veritatis,et quasi architecto beatae vitae dicta
-                sunt explicabo.
+                Bảo vệ môi trường và tiết kiệm nhiên liệu là hai vấn đề cần được giải quyết,
+                nhận thấy điều đó chung tôi quyết tạo ra TSMS để tối ưu hành trình vận chuyển qua đó bảo vệ môi trường và tiết kiệm nhiên liệu.
               </p>
               <p>
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                accusantium laudantium, totam rem aperiam, eaque ipsa quae ab
-                illo inventore veritatis,et quasi architecto beatae vitae dicta
-                sunt explicabo.
+                Phù hợp với tình trạng giao thông của Covid-19
               </p>
               <p>
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                accusantium laudantium, totam rem aperiam, eaque ipsa quae ab
-                illo inventore veritatis,et quasi architecto beatae vitae dicta
-                sunt explicabo.
+                Tăng thu nhập và tối ưu công việc cho đội ngũ tài xế
               </p>
             </div>
             {/* <!----//-------> */}
@@ -112,7 +104,7 @@ const Aboutus = () => {
           <div className="row m-0 p20">
             {/* <!---- Column Left ------> */}
             <div className="col-sm-6 col-md-6 col-lg-6 col-xl-6">
-              <h1>Who We Are</h1>
+              <h1>Chúng tôi là ai</h1>
               <p>
                 Sed ut perspiciatis unde omnis iste natus error sit voluptatem
                 accusantium laudantium, totam rem aperiam, eaque ipsa quae ab
@@ -131,7 +123,7 @@ const Aboutus = () => {
 
             {/* <!---- Column Right ------> */}
             <div className="col-sm-6 col-md-6 col-lg-6 col-xl-6">
-              <h1>What We Do</h1>
+              <h1>Chúng tôi làm gì</h1>
               <p>
                 Sed ut perspiciatis unde omnis iste natus error sit voluptatem
                 accusantium laudantium, totam rem aperiam, eaque ipsa quae ab

@@ -35,9 +35,9 @@ const Contactus = () => {
         <div className="contact_sect">
           <div className="container-fluid">
             <div className="inner_container">
-              <h1>CONTACT US</h1>
+              <h1>Liên lạc với chúng tôi</h1>
               <p>
-                <Link to="/home">Home</Link>&ensp;/&ensp;Contact Us
+                <Link to="/home">Trang chủ</Link>&ensp;/&ensp;Liên lạc với chúng tôi
               </p>
             </div>
           </div>
@@ -51,8 +51,8 @@ const Contactus = () => {
                 <div class="icon">
                   <img src="/images/cicon4.png" alt="Location Icon" />
                 </div>
-                <h4>Our Location</h4>
-                <p>Collin Street West, Victor 8007, Australia.</p>
+                <h4>Địa chỉ</h4>
+                <p>254 Nguyen Van Linh </p>
               </div>
             </div>
             <div class="col-sm-6 col-lg-4">
@@ -60,11 +60,9 @@ const Contactus = () => {
                 <div class="icon">
                   <img src="/images/cicon2.png" alt="Call Icon" />
                 </div>
-                <h4>Make a Call</h4>
+                <h4>Số điện thoại</h4>
                 <p>
-                  Mobile:(+91)77889 90000
-                  <br />
-                  Mobile:(+91)55 114 252525
+                  Mobile:0847247099
                   <br />
                 </p>
               </div>
@@ -74,8 +72,8 @@ const Contactus = () => {
                 <div class="icon">
                   <img src="/images/cicon3.png" alt="Mail Icon" />
                 </div>
-                <h4>Write Some Words</h4>
-                <p>smartedu@gmail.com</p>
+                <h4>Email</h4>
+                <p>letrunghieu5612@gmail.com</p>
               </div>
             </div>
           </div>
@@ -101,8 +99,7 @@ const Contactus = () => {
               </div>
             </div>
             <div class="form-grid col-md-6 col-lg-6 col-xl-6">
-              <h4>Send a Message</h4>
-              <p>Ex quem dicta delicata usu, zril vocibus maiestatis in qui.</p>
+              <h4>Gửi tin nhắn</h4>
               <form
                 class="form-group"
                 action="#"
@@ -110,21 +107,21 @@ const Contactus = () => {
                 ref={form}
                 onSubmit={sendEmail}
               >
-                <label for="name">Full Name</label>
+                <label for="name">Tên đầy đủ</label>
                 <input type="text" class="ipbox" id="name" name="name" />
-                <label for="mail">Your Email</label>
+                <label for="mail">Email của bạn</label>
                 <input type="text" class="ipbox" id="mail" name="email" />
-                <label for="sub">Subject</label>
+                <label for="sub">Chủ đề</label>
                 <input type="text" class="ipbox" id="sub" name="subject" />
-                <label for="yourm">Your Message</label>
+                <label for="yourm">Nội dung</label>
                 <textarea rows="5" id="yourm" name="message"></textarea>
                 <div class="button">
                   <input
                     type="submit"
                     class="submit_btn"
                     name=""
-                    value="Submit"
-                    // onClick="login(document.getElementById('usem').value,document.getElementById('pass').value)"
+                    value="Gửi"
+                  // onClick="login(document.getElementById('usem').value,document.getElementById('pass').value)"
                   />
                 </div>
               </form>

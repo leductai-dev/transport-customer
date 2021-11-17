@@ -21,7 +21,7 @@ const CarouselImages = () => {
                     src="/images/hicon1.png"
                     alt="Icon"
                   />
-                  <h3>Give us the hardest orders</h3>
+                  <h3>Hãy giao cho chúng tôi những đơn hàng khó </h3>
                 </div>
               </div>
               <div className="carousel-item">
@@ -37,7 +37,7 @@ const CarouselImages = () => {
                     src="/images/hicon2.png"
                     alt="Icon"
                   />
-                  <h3>Estimate cost</h3>
+                  <h3>Ước tính chi phí</h3>
                 </div>
               </div>
               <div className="carousel-item">
@@ -53,7 +53,7 @@ const CarouselImages = () => {
                     src="/images/hicon4.png"
                     alt="Icon"
                   />
-                  <h3>Find The Best Solution</h3>
+                  <h3>Tìm giải pháp tốt nhất</h3>
                 </div>
               </div>
             </div>
@@ -68,12 +68,13 @@ const CarouselImages = () => {
           </div>
           <div className="over_content">
             <p>
-              OPTIMIZED TRANSPORT SOLUTION <span>FOR THE SITUATION OF COVID-19
+              GIẢI PHÁP TỐI ƯU VẬN TẢI <span>PHÙ HỢP VỚI TÌNH HÌNH COVID-19
               </span>
             </p>
             {/* <AlgoliaSearch /> */}
             <p className="under_q">
-              Technology is bringing a massive way of Shipping goods quickly and economically.
+              Công nghệ đang mang lại một phương thức vận chuyển hàng hóa ồ ạt một cách nhanh chóng và tiết kiệm.
+
             </p>
           </div>
           {/* <!-- Go to section --> */}

@@ -24,7 +24,7 @@ const Scroller = () => {
     <>
       <section className="scroller_icon">
         <button onClick={topFunction} id="myBtn" title="Go to top">
-          <i className="fas fa-long-arrow-alt-up"></i>
+          <i className="fas fa-long-arrow-alt-up" style={{ color: "#cbe54f" }}></i>
         </button>
       </section>
     </>
