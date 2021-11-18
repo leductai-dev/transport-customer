@@ -134,17 +134,14 @@ const Testimonal = () => {
                 <li className="dot"></li>
                 <li className="dot"></li>
               </ul>
-              <div id="testim-content" className="cont">
+              <div id="testim-content" className="cont text-center">
                 <div className="active">
                   <div className="img">
                     <img src="/images/team5.jpg" alt="" />
                   </div>
                   <h2>Ngô Phan Phúc</h2>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco.
+                    Tôi hài lòng về chất lượng dịch vụ vận chuyển của TSMS.
                   </p>
                 </div>
 
@@ -154,10 +151,7 @@ const Testimonal = () => {
                   </div>
                   <h2>Nguyễn Hoài Trung</h2>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco.
+                    Hệ thống quản trị đơn giản, thân thiện với người dùng. Khả năng tuỳ biến cao giúp hệ thống đáp ứng được với nhiều ngành nghề.
                   </p>
                 </div>
 
@@ -167,10 +161,7 @@ const Testimonal = () => {
                   </div>
                   <h2>Lê Huỳnh Đức</h2>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco.
+                    Chúng tôi đã hợp tác với dịch vụ vận chuyển TSMS được hơn 2 năm và rất hài lòng.
                   </p>
                 </div>
 
@@ -180,10 +171,7 @@ const Testimonal = () => {
                   </div>
                   <h2>Phan Ngọc Anh</h2>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco.
+                    Làm việc chuyên nghiệp , chăm sóc khách hàng tốt.
                   </p>
                 </div>
 
@@ -193,10 +181,7 @@ const Testimonal = () => {
                   </div>
                   <h2>Trương Mỹ Nhung</h2>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco.
+                    Thái độ làm việc chuyên nghiệp, tốc độ chuyển hàng nhanh nhất mà tôi từng biết.
                   </p>
                 </div>
               </div>
