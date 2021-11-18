@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import $ from "jquery";
 import AuthContext from "../../Context/auth-context";
 import "./Navbar.css";
-import {useSelector} from 'react-redux'
-
+import {useSelector,useDispatch} from 'react-redux'
+import { logoutUser } from "../../Actions/Actions";
 
 const Navbar = (props) => {
     const customer = useSelector((state) => state.user);
-
+    const dispatch = useDispatch()
     if (window.matchMedia("(min-width: 768px)").matches) {
         $(document).ready(function () {
             $(window).scroll(function () {
@@ -74,14 +74,7 @@ const Navbar = (props) => {
         // to set the history and to be used in authContext logout
     }, [authCtx]);
 
-    const overlayHandler = () => {
-        // console.log("overlay");
-        setIsOverlay((prevState) => {
-            // console.log("prev", prevState);
-            // console.log("prev-opp", !prevState);
-            return !prevState;
-        });
-    };
+ 
     const categories = [
         {
             categoryName: "Thuê xe tải",
@@ -232,6 +225,7 @@ const Navbar = (props) => {
                         </li>
                         {customer.currentUser.customerId ? (
                             <>
+                                
                                 <li className="nav-item">
                                     <button
                                         type="button"
@@ -241,21 +235,7 @@ const Navbar = (props) => {
                                             border: "none",
                                             padding: '15px 20px 24px'
                                         }}
-                                        onClick={authCtx.logout}
-                                    >
-                                        Theo dõi
-                                    </button> 
-                                </li>
-                                <li className="nav-item">
-                                    <button
-                                        type="button"
-                                        className="nav-link"
-                                        style={{
-                                            background: "transparent",
-                                            border: "none",
-                                            padding: '15px 20px 24px'
-                                        }}
-                                        onClick={authCtx.logout}
+                                        onClick={()=>{dispatch(logoutUser())}}
                                     >
                                         Logout
                                     </button>

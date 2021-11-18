@@ -7,5 +7,7 @@ export const loginUser = userObj => ({
 })
 
 export const logoutUser = () => ({
-  type: 'LOGOUT_USER'
+  type: 'LOGOUT_USER',
+  payload: null
+
 })
