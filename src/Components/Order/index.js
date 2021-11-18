@@ -7,12 +7,20 @@ import { app } from "../../firebaseConfig";
 import { v4 as uuidv4 } from "uuid";
 import ImageUploading from "react-images-uploading";
 import axios from "axios";
+import {useSelector} from 'react-redux'
+import { useHistory } from "react-router";
 
 const Order = () => {
     const form = useRef();
     const [overlay, setOverlay] = useState(false);
     const [images, setImages] = React.useState([]);
-
+    const customer = useSelector((state) => state.user);
+    const history = useHistory()
+    useEffect(() => {
+        if(!customer.currentUser.customerId){
+            history.push('/login')
+        }
+    }, [])
     // const db_Transactions = app.database().ref().child("/system/transactions/");
     // db_Transactions.on("value", (snap) => {
     //     console.log(snap.val());
@@ -141,6 +149,7 @@ const Order = () => {
             //         // .required("Required!")
         }),
         onSubmit: (values) => {
+          
             const text = ["A","S","Q","T","P","N","T","H"];
             const transactionId = uuidv4();
             const transportCode = `${text[Math.floor(Math.random() * 8)]}${
@@ -180,7 +189,7 @@ const Order = () => {
                 const transaction = {
                     transactionId,
                     transportCode,
-                    customerId: uuidv4(), //==> need to change
+                    customerId: customer.currentUser.customerId , 
                     initialTime: Date.now(),
                     note,
                     shippingInfo: {
@@ -214,8 +223,6 @@ const Order = () => {
                 alert("Có lỗi xảy ra! Vui lòng thử lại.");  
                 throw errors 
             });
-          
-           
          
         },
     });

@@ -8,14 +8,6 @@ import Order from "./Components/Order";
 import UserDashboard from "./Components/User/UserDashboard";
 import "./styles.css";
 
-// const Signin = lazy(() => import("./Components/Signin/Signin"));
-// const StudentsSignup = lazy(() => import("./Components/Signup/StudentsSignup"));
-// const InstitutionSignup = lazy(() =>
-//   import("./Components/Signup/InstitutionSignup")
-// );
-// const Dashboard = lazy(() => import("./Components/Dashboard"));
-// const UserDashboard = lazy(() => import("./Components/User/UserDashboard"));
-
 const RedirectHome = () => {
   return <Redirect to="/dashboard/home" />;
 };
