@@ -317,8 +317,8 @@ const Signin = (props) => {
               </p>
               <p className="subtitle">
                 Bạn chưa có tài khoản?
-                <Link to="/StudentsSignup">Đăng ký</Link>
-                {/* <a href="/StudentsSignup">sign Up</a> */}
+                <Link to="/CustomerSignup">Đăng ký</Link>
+                {/* <a href="/CustomerSignup">sign Up</a> */}
               </p>
               {/* <div className="social-login">
                   <button className="google-btn">

@@ -20,7 +20,7 @@ const StudentsSignup = (props) => {
   });
 
   useEffect(() => {
-    
+
   }, []);
 
   const changeHandler = (event) => {
@@ -187,16 +187,16 @@ const StudentsSignup = (props) => {
       >
         <div className="container-fluid">
           <div className="container">
-            <div className="title">Signup</div>
+            <div className="title">Đăng ký</div>
             <div className="content">
               <form name="fname" onSubmit={signUpAuth}>
                 {error && <Alert variant="danger">{error}</Alert>}
                 <div className="user-details">
                   <div className="input-box">
-                    <span className="details">First Name</span>
+                    <span className="details">Họ và tên lót</span>
                     <input
                       type="text"
-                      placeholder="Enter your First Name"
+                      placeholder="Nhập họ và tên lót"
                       id="fname"
                       name="fname"
                       required
@@ -206,10 +206,10 @@ const StudentsSignup = (props) => {
                     />
                   </div>
                   <div className="input-box">
-                    <span className="details">Last Name</span>
+                    <span className="details">Tên</span>
                     <input
                       type="text"
-                      placeholder="Enter your Last Name"
+                      placeholder="Nhập tên"
                       id="lname"
                       name="lname"
                       required
@@ -230,10 +230,10 @@ const StudentsSignup = (props) => {
                     />
                   </div>
                   <div className="input-box">
-                    <span className="details">Phone Number</span>
+                    <span className="details">Số điện thoại</span>
                     <input
                       type="tel"
-                      placeholder="Enter your number"
+                      placeholder="Nhập số điện thoại của bạn"
                       id="phone"
                       name="phone"
                       required
@@ -242,10 +242,10 @@ const StudentsSignup = (props) => {
                     />
                   </div>
                   <div className="input-box">
-                    <span className="details">Password</span>
+                    <span className="details">Mật khẩu</span>
                     <input
                       type="password"
-                      placeholder="Enter your password"
+                      placeholder="Nhập mật khẩu của bạn"
                       id="password"
                       name="password"
                       required
@@ -254,10 +254,10 @@ const StudentsSignup = (props) => {
                     />
                   </div>
                   <div className="input-box">
-                    <span className="details">Confirm Password</span>
+                    <span className="details">Xác nhận mật khẩu</span>
                     <input
                       type="password"
-                      placeholder="Confirm your password"
+                      placeholder="Xác nhận mật khẩu"
                       id="confirmPassword"
                       name="confirmPassword"
                       required
@@ -266,7 +266,7 @@ const StudentsSignup = (props) => {
                     />
                   </div>
                   <div className="input-box">
-                    <span className="details">DOB</span>
+                    <span className="details">Ngày sinh</span>
                     <input
                       type="date"
                       id="dob"
@@ -292,7 +292,7 @@ const StudentsSignup = (props) => {
                 </div>
                 <div className="button">
                   <button className="btn btn-primary" type="submit">
-                    Register
+                    Đăng ký
                   </button>
                   &nbsp;&nbsp;&nbsp;
                   <button
@@ -300,7 +300,7 @@ const StudentsSignup = (props) => {
                     type="button"
                     onClick={() => props.history.push("/login")}
                   >
-                    Cancel
+                    Hủy
                   </button>
                 </div>
               </form>

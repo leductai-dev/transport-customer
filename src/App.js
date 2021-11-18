@@ -1,4 +1,4 @@
-import React, { lazy, Suspense,  } from "react";
+import React, { lazy, Suspense, } from "react";
 import { Route, Switch, Redirect } from "react-router";
 import Signin from "./Components/Signin/Signin";
 import StudentsSignup from "./Components/Signup/StudentsSignup";
@@ -28,7 +28,7 @@ const App = (props) => {
         <Switch>
           <Route path="/userdashboard" component={UserDashboard} />
           <Route path="/dashboard" component={Dashboard} />
-          <Route path="/StudentsSignup" component={StudentsSignup} />
+          <Route path="/CustomerSignup" component={StudentsSignup} />
           <Route path="/InstitutionSignup" component={InstitutionSignup} />
           <Route path="/login" component={Signin} />
           <Route path="/order" component={Order} />
