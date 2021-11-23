@@ -106,17 +106,10 @@ const Aboutus = () => {
             <div className="col-sm-6 col-md-6 col-lg-6 col-xl-6">
               <h1>Chúng tôi là ai</h1>
               <p>
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                accusantium laudantium, totam rem aperiam, eaque ipsa quae ab
-                illo inventore veritatis,et quasi architecto beatae vitae dicta
-                sunt explicabo.
+                Quản trị xuyên suốt toàn bộ quá trình vận tải: lập kế hoạch, điều phối, giám sát, cập nhật thông tin, ghi nhận mọi phát sinh theo thời gian thực.
               </p>
               <p>
-                Nemo enim ipsam,voluptatem quia voluptas sit aspernatur aut odit
-                aut fugit, sed quia,consequuntur magni dolores eos qui ratione
-                voluptatem sequi nesciunt.,Neque porro quisquam est, qui dolorem
-                ipsum quia dolor sit amet, adipisci velit, sed quia non numquam
-                eius modi tempora
+                Quản lý hàng hóa từ đầu đến cuối: nhập hàng, xuất hàng, tồn kho,… hỗ trợ gợi ý, tự động hóa theo các chiến thuật, tối ưu không gian, giảm sai sót.
               </p>
             </div>
             {/* <!------/ /-------> */}
@@ -125,17 +118,10 @@ const Aboutus = () => {
             <div className="col-sm-6 col-md-6 col-lg-6 col-xl-6">
               <h1>Chúng tôi làm gì</h1>
               <p>
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                accusantium laudantium, totam rem aperiam, eaque ipsa quae ab
-                illo inventore veritatis,et quasi architecto beatae vitae dicta
-                sunt explicabo.
+                Nền tảng dịch vụ kết nối – chia sẻ vận tải tin cậy, cập nhật mọi lúc, mọi nơi. Người vận chuyển có thêm doanh thu, chủ hàng giảm chi phí vận tải..
               </p>
               <p>
-                Nemo enim ipsam,voluptatem quia voluptas sit aspernatur aut odit
-                aut fugit, sed quia,consequuntur magni dolores eos qui ratione
-                voluptatem sequi nesciunt.,Neque porro quisquam est, qui dolorem
-                ipsum quia dolor sit amet, adipisci velit, sed quia non numquam
-                eius modi tempora
+                Nền tảng CNTT tối ưu vận chuyển container rỗng, tối ưu hóa để giảm chi phí vận chuyển, xếp dỡ và thời gian cho các đối tác.
               </p>
             </div>
             {/* <!------/ /-------> */}
