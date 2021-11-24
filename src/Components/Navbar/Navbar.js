@@ -5,6 +5,7 @@ import AuthContext from "../../Context/auth-context";
 import "./Navbar.css";
 import {useSelector,useDispatch} from 'react-redux'
 import { logoutUser } from "../../Actions/Actions";
+import localforage from "localforage";
 
 const Navbar = (props) => {
     const customer = useSelector((state) => state.user);
@@ -235,7 +236,9 @@ const Navbar = (props) => {
                                             border: "none",
                                             padding: '15px 20px 24px'
                                         }}
-                                        onClick={()=>{dispatch(logoutUser())}}
+                                        onClick={()=>{dispatch(logoutUser())
+                                            localStorage.removeItem('user')
+                                        }}
                                     >
                                         Logout
                                     </button>
@@ -261,7 +264,7 @@ const Navbar = (props) => {
                                     className="nav-link"
                                     to={`/login`}
                                 >
-                                    Login&nbsp;/&nbsp;Logout
+                                    Login&nbsp;/&nbsp;Register
                                 </Link>
                             </li>
                         )}

@@ -80,7 +80,7 @@ const Signin = (props) => {
                 const customer_db = app
                     .database()
                     .ref()
-                    .child(`/Customers/${userCredential.user.uid}`);
+                    .child(`/customers/${userCredential.user.uid}`);
                 customer_db.once("value", (snap) => {
                     if (snap.val()) {
                         dispatch(loginUser(snap.val()))
@@ -218,7 +218,7 @@ const Signin = (props) => {
                                 <span>or</span>
                             </p>
                             <p className="subtitle">
-                                Don't have an account?{" "}
+                                Don't have an account?{" "} 
                                 <a href="#Staffsignup"> sign Up</a>
                             </p>
                         </div>

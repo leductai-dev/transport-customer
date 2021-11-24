@@ -1,4 +1,4 @@
-import React, { lazy, Suspense,  } from "react";
+import React, { lazy, Suspense, useEffect  } from "react";
 import { Route, Switch, Redirect } from "react-router";
 import Signin from "./Components/Signin/Signin";
 import StudentsSignup from "./Components/Signup/StudentsSignup";
@@ -7,12 +7,23 @@ import Dashboard from "./Components/Dashboard";
 import Order from "./Components/Order";
 import UserDashboard from "./Components/User/UserDashboard";
 import "./styles.css";
-
+import {useSelector,useDispatch} from 'react-redux'
+import {loginUser} from './Actions/Actions'
+import { useHistory } from "react-router";
 const RedirectHome = () => {
   return <Redirect to="/dashboard/home" />;
 };
 
 const App = (props) => {
+  const customer = useSelector((state) => state.user);
+  const history = useHistory()
+  const dispatch = useDispatch()
+  useEffect(()=>{
+      if(localStorage.getItem("user")){
+        dispatch(loginUser(JSON.parse(localStorage.getItem("user"))))
+        history.push('/dashboard/home')
+      }
+  },[])
 
   return (
     <div className="App">

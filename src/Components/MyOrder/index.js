@@ -126,7 +126,7 @@ const MyOrders = () => {
                     </table>
                 </div>
             </section>
-            {dataModal && <Modal data={dataModal} onClose={()=>{setDataModal(null)}}/>}
+            {dataModal && <Modal transaction={dataModal} onClose={()=>{setDataModal(null)}}/>}
         </>
     );
 };

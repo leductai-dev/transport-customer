@@ -149,7 +149,7 @@ const Order = () => {
             //         // .required("Required!")
         }),
         onSubmit: (values) => {
-          
+            alert("sd")
             const text = ["A","S","Q","T","P","N","T","H"];
             const transactionId = uuidv4();
             const transportCode = `${text[Math.floor(Math.random() * 8)]}${
@@ -179,7 +179,7 @@ const Order = () => {
             const db_Transactions = app
             .database()
             .ref()
-            .child(`/system/transactions/pending/${transactionId}`);
+            .child(`/transactions/${transactionId}`);
             const promises = []
             images.forEach(image=>{
                 promises.push(uploadPhoto(image.data_url))
@@ -192,6 +192,7 @@ const Order = () => {
                     customerId: customer.currentUser.customerId , 
                     initialTime: Date.now(),
                     note,
+                    status: "pending",
                     shippingInfo: {
                         sender: {
                             name: senderName,
