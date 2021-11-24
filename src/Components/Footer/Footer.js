@@ -41,6 +41,11 @@ const Footer = (props) => {
               <div className="footer_program_widget">
                 <h4>DỊCH VỤ</h4>
                 <ul className="list-unstyled">
+                  <li>Thuê xe tải</li>
+                  <li>Vận chuyển hàng</li>
+                  <li>Chăm sóc xe</li>
+                </ul>
+                <ul className="list-unstyled">
                   {props.category !== null &&
                     props.category !== undefined &&
                     props.category.map((cat) => {

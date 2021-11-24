@@ -4587,3 +4587,6 @@ body {
 	border-right-color: #ddd;
 }
 
+#testim-content p{
+  text-align: center;
+}
