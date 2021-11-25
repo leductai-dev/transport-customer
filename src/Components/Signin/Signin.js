@@ -31,7 +31,7 @@ const Signin = (props) => {
     $(".down-button").click(function () {
       changeSlide("down");
     });
-  })
+
 
     const changeSlide = (direction) => {
       const sliderHeight = sliderContainer.clientHeight;
@@ -40,33 +40,19 @@ const Signin = (props) => {
         if (activeSlideIndex > 2 - 1) {
           activeSlideIndex = 0;
         }
-        app.auth()
-            .signInWithEmailAndPassword(userCred.email, userCred.password)
-            .then((userCredential) => {
-              console.log(userCredential.user.uid)
-                const customer_db = app
-                    .database()
-                    .ref()
-                    .child(`/customers/${userCredential.user.uid}`);
-                customer_db.once("value", (snap) => {
-                    if (snap.val()) {
-                        dispatch(loginUser(snap.val()))
-                        localStorage.setItem(
-                            "user",
-                            JSON.stringify(snap.val())
-                        );
-                        history.push("/dashboard/home");
-                    }
-                    else{
-                        alert("Có lỗi xảy rả. Vui lòng thử lại!");
-                    }
-                });
-            })
-            .catch((error) => {
-                alert("Error: " + error.message);
-            });
+      } else if (direction === "down") {
+        activeSlideIndex--;
+        if (activeSlideIndex < 0) {
+          activeSlideIndex = 2 - 1;
+        }
+      }
+
+      slideRight.style.transform = `translateY(-${activeSlideIndex * sliderHeight
+        }px)`;
+      slideLeft.style.transform = `translateY(${activeSlideIndex * sliderHeight
+        }px)`;
     };
- 
+  });
 
   const [userCred, setUserCred] = useState({
     email: "",
@@ -86,30 +72,30 @@ const Signin = (props) => {
       return;
     }
     app.auth()
-      .signInWithEmailAndPassword(userCred.email, userCred.password)
-      .then((userCredential) => {
-        console.log(userCredential.user.uid)
+    .signInWithEmailAndPassword(userCred.email, userCred.password)
+    .then((userCredential) => {
+      console.log(userCredential.user.uid)
         const customer_db = app
-          .database()
-          .ref()
-          .child(`/Customers/${userCredential.user.uid}`);
+            .database()
+            .ref()
+            .child(`/customers/${userCredential.user.uid}`);
         customer_db.once("value", (snap) => {
-          if (snap.val()) {
-            dispatch(loginUser(snap.val()))
-            localStorage.setItem(
-              "user",
-              JSON.stringify(snap.val())
-            );
-            history.push("/dashboard/home");
-          }
-          else {
-            alert("Có lỗi xảy rả. Vui lòng thử lại!");
-          }
+            if (snap.val()) {
+                dispatch(loginUser(snap.val()))
+                localStorage.setItem(
+                    "user",
+                    JSON.stringify(snap.val())
+                );
+                history.push("/dashboard/home");
+            }
+            else{
+                alert("Có lỗi xảy rả. Vui lòng thử lại!");
+            }
         });
-      })
-      .catch((error) => {
+    })
+    .catch((error) => {
         alert("Error: " + error.message);
-      });
+    });
   };
 
   return (
@@ -209,100 +195,14 @@ const Signin = (props) => {
                   />
                   <div className="underline"></div>
                 </div>
-                <div className="right-slide">
-                    <div className="container-fluid">
-                        <div className="container">
-                            <form>
-                                <div className="title">Customer Login</div>
-                                <div className="input-box underline">
-                                    <input
-                                        type="email"
-                                        placeholder="Enter Your Email..."
-                                        id="email"
-                                        name="email"
-                                        required
-                                        onChange={changeHandler}
-                                        value={userCred.email}
-                                    />
-                                    <div className="underline"></div>
-                                </div>
-                                <div className="input-box">
-                                    <input
-                                        type="password"
-                                        placeholder="Enter Your Password..."
-                                        id="password"
-                                        name="password"
-                                        required
-                                        onChange={changeHandler}
-                                        value={userCred.password}
-                                    />
-                                    <div className="underline"></div>
-                                </div>
-                                <div className="input-box button">
-                                    <input
-                                        onClick={handleLogin}
-                                        type="submit"
-                                        name=""
-                                        value="Login"
-                                    />
-                                </div>
-                            </form>
-                            <p className="or">
-                                <span>or</span>
-                            </p>
-                            <p className="subtitle">
-                                <button
-                                    type="button"
-                                    onClick={() => setForgotModal(true)}
-                                >
-                                    Forget Password
-                                </button>
-                            </p>
-                            <p className="subtitle">
-                                Don't have an account?
-                                <Link to="/StudentsSignup">sign Up</Link>
-                            </p>
-                        </div>
-                    </div>
-                    <div className="container-fluid">
-                        <div className="container ">
-                            <form action="#">
-                                <div className="title">Addmin Login</div>
-                                <div className="input-box underline">
-                                    <input
-                                        type="text"
-                                        placeholder="Type Username or Email"
-                                        id="usem"
-                                        required
-                                    />
-                                    <div className="underline"></div>
-                                </div>
-                                <div className="input-box">
-                                    <input
-                                        type="password"
-                                        placeholder="Enter Your Password"
-                                        id="pass"
-                                        required
-                                    />
-                                    <div className="underline"></div>
-                                </div>
-                                <div className="input-box button">
-                                    <input
-                                        type="submit"
-                                        name=""
-                                        value="Login"
-                                    />
-                                </div>
-                            </form>
-                            <p className="or">
-                                <span>or</span>
-                            </p>
-                            <p className="subtitle">
-                                Don't have an account?{" "} 
-                                <a href="#Staffsignup"> sign Up</a>
-                            </p>
-                        </div>
-                    </div>
+                <div className="input-box">
+                  <input
+                    type="password"
+                    placeholder="Enter Your Password"
+                    id="pass"
+                    required
+                  />
+                  <div className="underline"></div>
                 </div>
                 <div className="input-box button">
                   <input
@@ -334,5 +234,5 @@ const Signin = (props) => {
     </>
   );
 };
-}
-export default React.memo(Signin)
+
+export default React.memo(Signin);
