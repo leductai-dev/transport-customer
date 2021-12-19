@@ -150,6 +150,16 @@
       display: block;
       visibility: hidden;
     }
+
+    #trigger-btn {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000000;
+      padding: 10px 20px;
+      background: red;
+      cursor: pointer;
+    }
   </style>
 </head>
 
@@ -164,32 +174,31 @@
   <div class="modal" id='modalMap'>
     <div class='map-modal' id="map">
     </div>
-    <input type="text" hidden id='address'/>
-    <input type="text" hidden id='lat'/>
-    <input type="text" hidden id='lng'/>
+    <input type="text" hidden id='address' />
+    <input type="text" hidden id='lat' />
+    <input type="text" hidden id='lng' />
+
+    <input type="text" hidden id='fromAddress' />
+    <input type="text" hidden id='toAddress' />
+    <input type="text" hidden id='driverAddress' />
+
   </div>
+  <button class='d-none' onclick="addLayer()" id="addLayer"></button>
+  <button class='d-none' onclick="addDriverLayer()" id="addDriverLayer"></button>
+  <button class='d-none' onclick="clearLayer()" id="clearLayer"></button>
+
 
   <script>
-    // Initialize the map and assign it to a variable for later use
     var map = L.map('map', {
-      // Set latitude and longitude of the map center (required)
       center: [16.04868738504644, 108.20296304994486],
-      // Set the initial zoom level, values 0-18, where 0 is most zoomed-out (required)
       zoom: 6
     });
-
     L.control.scale().addTo(map);
-
-    // Create a Tile Layer and add it to the map
-    //var tiles = new L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.png').addTo(map);
     L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
-
     var searchControl = new L.esri.Controls.Geosearch().addTo(map);
-
     var results = new L.LayerGroup().addTo(map);
-
     searchControl.on('results', function (data) {
       results.clearLayers();
       for (var i = data.results.length - 1; i >= 0; i--) {
@@ -200,8 +209,25 @@
       }
     });
     setTimeout(function () { $('.pointer').fadeOut('slow'); }, 3400);
-
+    function addLayer() {
+      const from = document.getElementById('fromAddress').value
+      const to = document.getElementById('toAddress').value
+      if (from && to) {
+        results.addLayer(L.marker(JSON.parse(from)));
+        results.addLayer(L.marker(JSON.parse(to)));
+      }
+    } 
+    function addDriverLayer() {
+      const driver = document.getElementById('driverAddress').value
+      if (driver) {
+        results.addLayer(L.marker(JSON.parse(driver)));
+      }
+    } 
+    function clearLayer() {
+      results.clearLayers();
+    }
   </script>
+
 </body>
 
 </html>

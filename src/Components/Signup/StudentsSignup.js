@@ -40,7 +40,7 @@ const StudentsSignup = (props) => {
           customerId: userCredential.user.uid,
           email: userDetails.email,
           joinDate: Date.now(),
-          name: userDetails.fname + userDetails.lname,
+          name: userDetails.lname +''+userDetails.fname,
           phone: userDetails.phone,
         };
         const customer_db = app
@@ -73,9 +73,23 @@ const StudentsSignup = (props) => {
             <div className="content">
               <form name="fname">
                 <div className="user-details">
+                <div className="input-box">
+                    <span className="details">
+                      Họ lót
+                    </span>
+                    <input
+                      type="text"
+                      placeholder="Enter your Last Name"
+                      id="lname"
+                      name="lname"
+                      required
+                      onChange={changeHandler}
+                      value={userDetails.lname}
+                    />
+                  </div>
                   <div className="input-box">
                     <span className="details">
-                      First Name
+                      Tên
                     </span>
                     <input
                       type="text"
@@ -88,20 +102,7 @@ const StudentsSignup = (props) => {
                       value={userDetails.fname}
                     />
                   </div>
-                  <div className="input-box">
-                    <span className="details">
-                      Last Name
-                    </span>
-                    <input
-                      type="text"
-                      placeholder="Enter your Last Name"
-                      id="lname"
-                      name="lname"
-                      required
-                      onChange={changeHandler}
-                      value={userDetails.lname}
-                    />
-                  </div>
+                
                   <div className="input-box">
                     <span className="details">Email</span>
                     <input
@@ -159,19 +160,20 @@ const StudentsSignup = (props) => {
                 </div>
                 <div className="button">
                   <button
+                    className="btn  mr-3 btn-primary"
+                    type="button"
+                    onClick={()=>history.goBack()}
+                  >
+                    Quay lại
+                  </button>
+                  <button
                     className="btn btn-primary"
                     type="submit"
                     onClick={(e) => {
                       handleRegister(e);
                     }}
                   >
-                    Register
-                  </button>
-                  <button
-                    className="btn btn-primary"
-                    type="button"
-                  >
-                    Cancel
+                    Đăng kí
                   </button>
                 </div>
               </form>

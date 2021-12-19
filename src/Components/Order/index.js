@@ -7,20 +7,22 @@ import { app } from "../../firebaseConfig";
 import { v4 as uuidv4 } from "uuid";
 import ImageUploading from "react-images-uploading";
 import axios from "axios";
-import {useSelector} from 'react-redux'
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 
 const Order = () => {
     const form = useRef();
     const [overlay, setOverlay] = useState(false);
     const [images, setImages] = React.useState([]);
+    const [loading, setLoading] = React.useState(false);
     const customer = useSelector((state) => state.user);
-    const history = useHistory()
+    const history = useHistory();
+
     useEffect(() => {
-        if(!customer.currentUser.customerId){
-            history.push('/login')
+        if (!customer.currentUser.customerId) {
+            history.push("/login");
         }
-    }, [])
+    }, []);
     // const db_Transactions = app.database().ref().child("/system/transactions/");
     // db_Transactions.on("value", (snap) => {
     //     console.log(snap.val());
@@ -62,6 +64,7 @@ const Order = () => {
     const onChange = (imageList, addUpdateIndex) => {
         setImages(imageList);
     };
+
     const formik = useFormik({
         initialValues: {
             senderName: "",
@@ -84,35 +87,35 @@ const Order = () => {
         validationSchema: Yup.object({
             senderName: Yup.string()
                 .min(3, "Mininum 3 characters")
-                .max(30, "Maximum 30 characters")
+                .max(50, "Maximum 30 characters")
                 .required("Required!"),
             senderPhone: Yup.string()
                 .min(9, "Mininum 9 characters")
-                .max(11, "Maximum 11 characters")
+                .max(12, "Maximum 11 characters")
                 .required("Required!"),
             receiverName: Yup.string()
                 .min(3, "Mininum 4 characters")
-                .max(15, "Maximum 30 characters")
+                .max(50, "Maximum 30 characters")
                 .required("Required!"),
             receiverPhone: Yup.string()
                 .min(9, "Mininum 9 characters")
-                .max(11, "Maximum 11 characters")
+                .max(13, "Maximum 11 characters")
                 .required("Required!"),
             fromAddress: Yup.string()
                 .min(15, "Mininum 15 characters")
-                .max(200, "Maximum 200 characters")
+                .max(400, "Maximum 200 characters")
                 .required("Required!"),
             toAddress: Yup.string()
                 .min(15, "Mininum 8 characters")
-                .max(200, "Maximum 200 characters")
+                .max(400, "Maximum 200 characters")
                 .required("Required!"),
             fromLat: Yup.string()
                 .min(2, "Mininum 2 characters")
-                .max(20, "Maximum 15 characters")
+                .max(25, "Maximum 15 characters")
                 .required("Required!"),
             toLat: Yup.string()
                 .min(2, "Mininum 2 characters")
-                .max(20, "Maximum 15 characters")
+                .max(25, "Maximum 15 characters")
                 .required("Required!"),
             fromLong: Yup.string()
                 .min(2, "Mininum 2 characters")
@@ -120,37 +123,37 @@ const Order = () => {
                 .required("Required!"),
             toLong: Yup.string()
                 .min(2, "Mininum 2 characters")
-                .max(20, "Maximum 15 characters")
+                .max(25, "Maximum 15 characters")
                 .required("Required!"),
             note: Yup.string()
                 .min(2, "Mininum 2 characters")
-                .max(15, "Maximum 200 characters"),
+                .max(1000, "Maximum 1000 characters"),
             productName: Yup.string()
                 .min(6, "Mininum 6 characters")
-                .max(100, "Maximum 100 characters")
+                .max(1000, "Maximum 100 characters")
                 .required("Required!"),
             weight: Yup.number()
                 .min(0.1, "Mininum 1 characters")
-                .max(10000, "Maximum 4 characters")
+                .max(1000, "Maximum 1000 characters")
                 .required("Required!"),
             length: Yup.number()
-                .max(15, "Maximum 4 characters")
+                .max(15, "Maximum is 15")
                 .min(0.1, "Mininum 1 characters")
                 .required("Required!"),
             width: Yup.number()
                 .min(0.1, "Mininum 2 characters")
-                .max(15, "Maximum 4 characters")
+                .max(15, "Maximum is 15m")
                 .required("Required!"),
             height: Yup.number()
                 .min(0.1, "Mininum 2 characters")
-                .max(15, "Maximum 4 characters")
+                .max(15, "Maximum is 15")
                 .required("Required!"),
             imageUrl: Yup.string(),
             //         // .required("Required!")
         }),
         onSubmit: (values) => {
-            alert("sd")
-            const text = ["A","S","Q","T","P","N","T","H"];
+            setLoading(true);
+            const text = ["A", "S", "Q", "T", "P", "N", "T", "H"];
             const transactionId = uuidv4();
             const transportCode = `${text[Math.floor(Math.random() * 8)]}${
                 text[Math.floor(Math.random() * 8)]
@@ -175,56 +178,60 @@ const Order = () => {
                 width,
                 height,
             } = values;
-            
+
             const db_Transactions = app
-            .database()
-            .ref()
-            .child(`/transactions/${transactionId}`);
-            const promises = []
-            images.forEach(image=>{
-                promises.push(uploadPhoto(image.data_url))
-            })
-            Promise.all(promises).then((response) => {
-                const imageUrl = response.map(res=>res.message).join(',')
-                const transaction = {
-                    transactionId,
-                    transportCode,
-                    customerId: customer.currentUser.customerId , 
-                    initialTime: Date.now(),
-                    note,
-                    status: "pending",
-                    shippingInfo: {
-                        sender: {
-                            name: senderName,
-                            phone: senderPhone,
-                            address: fromAddress,
-                            lat: fromLat,
-                            long: fromLong,
-                        },
-                        receiver: {
-                            name: receiverName,
-                            phone: receiverPhone,
-                            address: toAddress,
-                            lat: toLat,
-                            long: toLong,
-                        },
-                        productInfo: {
-                            productName,
-                            weight,
-                            length,
-                            width,
-                            height,
-                            imageUrl
-                        },
-                    },
-                };
-                db_Transactions.set(transaction);
-                alert("Yêu cầu vận chuyển thành công!");  
-            }).catch((errors)=>{
-                alert("Có lỗi xảy ra! Vui lòng thử lại.");  
-                throw errors 
+                .database()
+                .ref()
+                .child(`/transactions/${transactionId}`);
+            const promises = [];
+            images.forEach((image) => {
+                promises.push(uploadPhoto(image.data_url));
             });
-         
+            Promise.all(promises)
+                .then((response) => {
+                    const imageUrl = response
+                        .map((res) => res.message)
+                        .join(",");
+                    const transaction = {
+                        transactionId,
+                        transportCode,
+                        customerId: customer.currentUser.customerId,
+                        initialTime: Date.now(),
+                        note,
+                        status: "pending",
+                        shippingInfo: {
+                            sender: {
+                                name: senderName,
+                                phone: senderPhone,
+                                address: fromAddress,
+                                lat: fromLat,
+                                long: fromLong,
+                            },
+                            receiver: {
+                                name: receiverName,
+                                phone: receiverPhone,
+                                address: toAddress,
+                                lat: toLat,
+                                long: toLong,
+                            },
+                            productInfo: {
+                                productName,
+                                weight,
+                                length,
+                                width,
+                                height,
+                                imageUrl,
+                            },
+                        },
+                    };
+                    db_Transactions.set(transaction);
+                    setLoading(false);
+                    alert("Yêu cầu vận chuyển thành công!");
+                })
+                .catch((errors) => {
+                    alert("Có lỗi xảy ra! Vui lòng thử lại.");
+                    throw errors;
+                });
         },
     });
 
@@ -237,18 +244,13 @@ const Order = () => {
                 .catch((err) => reject(err));
         });
     };
-    useEffect(() => {
-        // app.database()
-        //     .ref()
-        //     .child("/")
-        //     .on("value", (dataSnapshot) => {
-        //         console.log(dataSnapshot);
-        //         console.log("sdasdasd");
-        //     });
-        
-    }, []);
 
-    const { values, errors, handleSubmit, touched, handleChange } = formik;
+    const { values, errors, handleSubmit, touched, handleChange, submitForm } =
+        formik;
+    const _handleSubmit = () => {
+        submitForm();
+        console.log("submit form");
+    };
     return (
         <>
             {/* section down where it should come */}
@@ -268,32 +270,32 @@ const Order = () => {
                     </div>
                 </div>
             </section>
-            <section class="contact-sect">
-                <div class="container-fluid">
-                    <div class="row m-0">
-                        <div class="col-sm-6 col-lg-4">
-                            <div class="contact_location">
-                                <div class="icon">
+            <section className="contact-sect">
+                <div className="container-fluid">
+                    <div className="row m-0">
+                        <div className="col-sm-6 col-lg-4">
+                            <div className="contact_location">
+                                <div className="icon">
                                     <img
                                         src="/images/cicon4.png"
                                         alt="Location Icon"
                                     />
                                 </div>
-                                <h4>Our Location</h4>
+                                <h4>Vị trí chúng tôi</h4>
                                 <p>
-                                    Collin Street West, Victor 8007, Australia.
+                                    Số 254, Nguyễn Văn Linh, Thạc Gián, Đà Nẵng
                                 </p>
                             </div>
                         </div>
-                        <div class="col-sm-6 col-lg-4">
-                            <div class="contact_location">
-                                <div class="icon">
+                        <div className="col-sm-6 col-lg-4">
+                            <div className="contact_location">
+                                <div className="icon">
                                     <img
                                         src="/images/cicon2.png"
                                         alt="Call Icon"
                                     />
                                 </div>
-                                <h4>Make a Call</h4>
+                                <h4>Liên Hệ</h4>
                                 <p>
                                     Mobile:(+91)77889 90000
                                     <br />
@@ -302,24 +304,24 @@ const Order = () => {
                                 </p>
                             </div>
                         </div>
-                        <div class="col-sm-6 col-lg-4">
-                            <div class="contact_location">
-                                <div class="icon">
+                        <div className="col-sm-6 col-lg-4">
+                            <div className="contact_location">
+                                <div className="icon">
                                     <img
                                         src="/images/cicon3.png"
                                         alt="Mail Icon"
                                     />
                                 </div>
-                                <h4>Write Some Words</h4>
-                                <p>smartedu@gmail.com</p>
+                                <h4>Gửi đóng góp</h4>
+                                <p>duytanvn@dtu.edu.vn</p>
                             </div>
                         </div>
                     </div>
                     <form onSubmit={handleSubmit}>
-                        <div class="row p-20 m-0">
-                            <div class="form-grid col-md-6 col-lg-6 col-xl-6">
-                                <form
-                                    class="form-group"
+                        <div className="row p-20 m-0">
+                            <div className="form-grid col-md-6 col-lg-6 col-xl-6">
+                                <div
+                                    className="form-group"
                                     action="#"
                                     method="get"
                                     ref={form}
@@ -329,7 +331,7 @@ const Order = () => {
                                     <div className="position-relative">
                                         <input
                                             type="text"
-                                            class="ipbox"
+                                            className="ipbox"
                                             id="name"
                                             name="senderName"
                                             value={values.senderName}
@@ -353,7 +355,7 @@ const Order = () => {
                                     <div className="position-relative">
                                         <input
                                             type="text"
-                                            class="ipbox"
+                                            className="ipbox"
                                             id="mail"
                                             name="senderPhone"
                                             value={values.senderPhone}
@@ -383,7 +385,7 @@ const Order = () => {
                                                 );
                                             }}
                                             type="text"
-                                            class="ipbox"
+                                            className="ipbox"
                                             id="sub"
                                             name="fromAddress"
                                             value={values.fromAddress}
@@ -402,11 +404,11 @@ const Order = () => {
                                                 </p>
                                             )}
                                     </div>
-                                </form>
+                                </div>
                             </div>
-                            <div class="form-grid col-md-6 col-lg-6 col-xl-6">
-                                <form
-                                    class="form-group"
+                            <div className="form-grid col-md-6 col-lg-6 col-xl-6">
+                                <div
+                                    className="form-group"
                                     action="#"
                                     method="get"
                                     ref={form}
@@ -416,7 +418,7 @@ const Order = () => {
                                     <div className="position-relative">
                                         <input
                                             type="text"
-                                            class="ipbox"
+                                            className="ipbox"
                                             id="name"
                                             name="receiverName"
                                             value={values.receiverName}
@@ -440,7 +442,7 @@ const Order = () => {
                                     <div className="position-relative">
                                         <input
                                             type="text"
-                                            class="ipbox"
+                                            className="ipbox"
                                             id="mail"
                                             name="receiverPhone"
                                             value={values.receiverPhone}
@@ -464,7 +466,7 @@ const Order = () => {
                                     <div className="position-relative">
                                         <input
                                             type="text"
-                                            class="ipbox"
+                                            className="ipbox"
                                             id="sub"
                                             name="toAddress"
                                             value={values.toAddress}
@@ -489,11 +491,11 @@ const Order = () => {
                                             </p>
                                         )}
                                     </div>
-                                </form>
+                                </div>
                             </div>
-                            <div class="form-grid col-md-6 col-lg-6 col-xl-6">
-                                <form
-                                    class="form-group"
+                            <div className="form-grid col-md-6 col-lg-6 col-xl-6">
+                                <div
+                                    className="form-group"
                                     action="#"
                                     method="get"
                                     ref={form}
@@ -503,7 +505,7 @@ const Order = () => {
                                     <div className="position-relative">
                                         <input
                                             type="text"
-                                            class="ipbox"
+                                            className="ipbox"
                                             id="name"
                                             name="productName"
                                             value={values.productName}
@@ -552,7 +554,7 @@ const Order = () => {
                                             <div className="position-relative">
                                                 <input
                                                     type="number"
-                                                    class="ipbox"
+                                                    className="ipbox"
                                                     id="mail"
                                                     name="weight"
                                                     onChange={handleChange}
@@ -593,7 +595,7 @@ const Order = () => {
                                             <div className="position-relative">
                                                 <input
                                                     type="number"
-                                                    class="ipbox"
+                                                    className="ipbox"
                                                     id="mail"
                                                     onChange={handleChange}
                                                     name="length"
@@ -634,7 +636,7 @@ const Order = () => {
                                             <div className="position-relative">
                                                 <input
                                                     type="number"
-                                                    class="ipbox"
+                                                    className="ipbox"
                                                     id="mail"
                                                     name="width"
                                                     onChange={handleChange}
@@ -674,7 +676,7 @@ const Order = () => {
                                             <div className="position-relative">
                                                 <input
                                                     type="number"
-                                                    class="ipbox"
+                                                    className="ipbox"
                                                     id="mail"
                                                     name="height"
                                                     onChange={handleChange}
@@ -703,9 +705,9 @@ const Order = () => {
                                         onChange={handleChange}
                                         value={values.note}
                                     ></textarea>
-                                </form>
+                                </div>
                             </div>
-                            <div class="form-grid col-md-6 col-lg-6 col-xl-6">
+                            <div className="form-grid col-md-6 col-lg-6 col-xl-6">
                                 <h3>Hình ảnh</h3>
                                 <Text>
                                     Vui lòng đăng tải ít nhất 1 hình ảnh!
@@ -775,7 +777,7 @@ const Order = () => {
                                                         }}
                                                     >
                                                         <i
-                                                            class="fa fa-times-circle"
+                                                            className="fa fa-times-circle"
                                                             aria-hidden="true"
                                                         ></i>
                                                     </Button>
@@ -813,18 +815,37 @@ const Order = () => {
                                     )}
                                 </ImageUploading>
                             </div>
-                            <Button
-                                sx={{
-                                    margin: "30px auto 80px",
-                                    padding: "20px 250px",
+                     <Box sx={{
+                         display: 'flex',
+                         alignItems: 'center'
+                     }}>
+                     <input
+                                style={{
+                                    margin: " 18px 16px",
+                                    padding: "20px 60px",
                                     background:
                                         "-webkit-linear-gradient(135deg, rgb(255, 16, 83) 0%, rgb(52, 82, 255) 100% )",
                                     outline: "none",
+                                    border: "none",
+                                    fontWeight: 500,
+                                    borderRadius: "12px",
+                                    fontSize: "16px",
+                                    color: 'white'
                                 }}
+                                onClick={()=>{console.log(errors)}}
                                 type="submit"
-                            >
-                                Gửi yêu cầu
-                            </Button>
+                                value="Gửi yêu cầu"
+                            />
+                            {loading && (
+                                <img
+                                    className="ml-2"
+                                    width="30px"
+                                    height='30px'
+                                    src="/images/Spin-1s-200px.gif"
+                                    alt="Location Icon"
+                                />
+                            )}
+                     </Box>
                         </div>
                     </form>
                 </div>

@@ -6,52 +6,103 @@ import { Box, Button, Text, Image } from "rebass";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router";
-// import { MapContainer, TileLayer, Marker, Popup, Tooltip } from "react-leaflet";
-// import L from "leaflet";
 
-// const DestinationIcon = new L.Icon({
-//     iconUrl: "/images/destination.png",
-//     iconSize: [32, 32],
-//     iconAnchor: [17, 46],
-//     popupAnchor: [0, -46],
-// });
-// const DriverIcon = new L.Icon({
-//     iconUrl: "/images/teamLocation.png",
-//     iconSize: [32, 32],
-//     iconAnchor: [17, 46],
-//     popupAnchor: [0, -46],
-// });
-// const InitialIcon = new L.Icon({
-//     iconUrl: "/images/userLocation.png",
-//     iconSize: [32, 32],
-//     iconAnchor: [17, 46],
-//     popupAnchor: [0, -46],
-// });
 const modal = ({ transaction, onClose }) => {
     const customer = useSelector((state) => state.user);
-    const [center, setCenter] = useState([16.060392, 108.211847]);
-    console.log(transaction);
-    const { initialTime, note, shippingInfo, transportCode } = transaction;
+    const { initialTime, shippingInfo, transportCode } = transaction;
+    const note = transaction?.note;
     const { height, weight, width, length, imageUrl, productName } =
         shippingInfo.productInfo;
     const { receiver, sender } = shippingInfo;
 
-    const fromAdress =[transaction.shippingInfo.sender.lat, transaction.shippingInfo.sender.long]
-    const toAddress =[transaction.shippingInfo.receiver.lat, transaction.shippingInfo.receiver.long]
-    // const currentLocation =[transaction.shippingInfo.driver.lat, transaction.shippingInfo.driver.long]
+    const fromAddress = {
+        lat: transaction.shippingInfo.sender.lat,
+        lng: transaction.shippingInfo.sender.long,
+    };
+    const toAddress = {
+        lat: transaction.shippingInfo.receiver.lat,
+        lng: transaction.shippingInfo.receiver.long,
+    };
 
+    const [driver, setDriver] = useState(null);
+    // const currentLocation =[transaction.shippingInfo.driver.lat, transaction.shippingInfo.driver.long]
+    const ref = useRef(null);
     const className =
         transaction.status === "pending"
             ? "badge-warning"
-            : transaction.status === "inProgress"
+            : val.status === "inProgress"
             ? "badge-primary"
-            : "badge-success";
-    const status =
-        transaction.status === "pending"
-            ? "Chờ xử lý"
-            : transaction.status === "inProgress"
-            ? "Đang chuyển"
-            : "Đã hoàn thành";
+            : val.status === "completed"
+            ? "badge-success"
+            : "badge-danger";
+    const renderStatus = () => {
+        let returnVal = "";
+        switch (transaction.status) {
+            case "pending":
+                returnVal = "Chờ xử lý";
+                break;
+            case "driverPending":
+                returnVal = "Chờ xử lý";
+                break;
+            case "inProgress":
+                returnVal = "Đang giao";
+                break;
+            case "completed":
+                returnVal = "Đã hoàn tất";
+                break;
+            case "canceled":
+                returnVal = "Đã hủy";
+                break;
+            default:
+                break;
+        }
+        return returnVal;
+    };
+
+    useEffect(() => {
+        document.getElementById("clearLayer").click();
+        var myDivMap = document.getElementById("map");
+        if (ref.current) {
+            ref.current.appendChild(myDivMap);
+            document.getElementById("fromAddress").value =
+                JSON.stringify(fromAddress);
+            document.getElementById("toAddress").value =
+                JSON.stringify(toAddress);
+
+            document.getElementById("addLayer").click();
+        }
+        return () => {
+            document.getElementById("clearLayer").click();
+            var modalMap = document.getElementById("modalMap");
+            modalMap.appendChild(myDivMap);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (
+            transaction?.status === "inProgress" ||
+            transaction?.status === "completed"
+        ) {
+            const db_driver = app
+                .database()
+                .ref()
+                .child(`/driver/${transaction?.driverId}`);
+            db_driver.on("value", function (snap) {
+                if (snap.val()) {
+                    const _driver = Object.values(snap.val())[0];
+                    const driverAdress = {
+                        lat: _driver.vehicleStatus.lat,
+                        lng: _driver.vehicleStatus.long,
+                    };
+                    document.getElementById("driverAddress").value =
+                        JSON.stringify(driverAdress);
+
+                    document.getElementById("addDriverLayer").click();
+                    setDriver(_driver);
+                }
+            });
+        }
+    }, []);
 
     return (
         <Box
@@ -93,7 +144,9 @@ const modal = ({ transaction, onClose }) => {
                         src="/images/userLocation.png"
                     />
                     Mã giao dịch: {transportCode}
-                    <span class={`badge ml-1 mb-1 ${className}`}>{status}</span>
+                    <span class={`badge ml-1 mb-1 ${className}`}>
+                        {renderStatus()}
+                    </span>
                 </Text>
                 <Text
                     sx={{
@@ -132,77 +185,7 @@ const modal = ({ transaction, onClose }) => {
                     height: "100%",
                 }}
             >
-                <Box sx={{ height: "350px" }}>
-                    <MapContainer
-                        style={{
-                            height: "100%",
-                            width: "100%",
-                            position: "relative",
-                            zIndex: "0",
-                        }}
-                        /*  center={location?location:center} */
-                        center={center}
-                        zoom={5}
-                        scrollWheelZoom={true}
-                    >
-                        <Marker
-                            eventHandlers={{
-                                click: () => {
-                                    // setShowTransactionInfo(true);
-                                },
-                            }}
-                            icon={InitialIcon}
-                            position={fromAdress}
-                        >
-                            <Tooltip
-                                direction="top"
-                                maxWidth={10}
-                                offset={[0, -45]}
-                                opacity={1}
-                            >
-                                "Tooltip"
-                            </Tooltip>
-                        </Marker>
-                        <Marker
-                            onClick={() => {
-                                // setShowTransactionInfo(true);
-                            }}
-                            icon={DestinationIcon}
-                            position={toAddress}
-                        >
-                            <Tooltip
-                                direction="top"
-                                maxWidth={10}
-                                offset={[0, -45]}
-                                opacity={1}
-                            >
-                                "Tooltip"
-                            </Tooltip>
-                        </Marker>
-                        {/* <Marker
-                            onClick={() => {
-                                // setShowTransactionInfo(true);
-                            }}
-                            key={index}
-                            icon={DriverIcon}
-                            position={currentLocation}
-                        >
-                            <Tooltip
-                                direction="top"
-                                maxWidth={10}
-                                offset={[0, -45]}
-                                opacity={1}
-                                // permanent
-                            >
-                                "Tooltip"
-                            </Tooltip>
-                        </Marker> */}
-                        <TileLayer
-                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                        />
-                    </MapContainer>
-                </Box>
+                <Box ref={ref} sx={{ height: "350px" }}></Box>
                 <Box
                     sx={{
                         display: "flex",
@@ -210,66 +193,69 @@ const modal = ({ transaction, onClose }) => {
                         padding: "30px 30px 30px",
                     }}
                 >
-                    <Box sx={{ width: "100%", paddingRight: "10px" }}>
-                        <Text
-                            as="p"
-                            sx={{
-                                zIndex: 1,
-                                width: "fit-content",
-                                color: "#1b3a57",
-                                pr: "10px",
-                                fontSize: "20px",
-                                fontWeight: "bold",
-                                marginBottom: "15px",
-                            }}
-                        >
-                            Thông tin giao hàng
-                        </Text>
-                        <Box>
+                    {driver && (
+                        <Box sx={{ width: "100%", paddingRight: "10px" }}>
                             <Text
                                 as="p"
                                 sx={{
-                                    fontSize: "16px",
-                                    color: "#000000",
-                                    marginBottom: "10px",
+                                    zIndex: 1,
+                                    width: "fit-content",
+                                    color: "#1b3a57",
+                                    pr: "10px",
+                                    fontSize: "20px",
+                                    fontWeight: "bold",
+                                    marginBottom: "15px",
                                 }}
                             >
-                                Người vận chuyển: {sender.name}
+                                Thông tin giao hàng
                             </Text>
-                            <Text
-                                as="p"
-                                sx={{
-                                    fontSize: "16px",
-                                    color: "#000000",
-                                    marginBottom: "10px",
-                                }}
-                            >
-                                Số điện thoại: {sender.phone}
-                            </Text>
-                            <Text
-                                as="p"
-                                sx={{
-                                    fontSize: "16px",
-                                    color: "#000000",
-                                    marginBottom: "10px",
-                                }}
-                            >
-                                Thời gian lấy hàng dự kiến: 8 giờ 30. Ngày
-                                22/12/2021
-                            </Text>
-                            <Text
-                                as="p"
-                                sx={{
-                                    fontSize: "16px",
-                                    color: "#000000",
-                                    marginBottom: "10px",
-                                }}
-                            >
-                                Thời gian nhận hàng dự kiến: 8 giờ 30. Ngày
-                                22/12/2021
-                            </Text>
+                            <Box>
+                                <Text
+                                    as="p"
+                                    sx={{
+                                        fontSize: "16px",
+                                        color: "#000000",
+                                        marginBottom: "10px",
+                                    }}
+                                >
+                                    Người vận chuyển: {driver.name}
+                                </Text>
+                                <Text
+                                    as="p"
+                                    sx={{
+                                        fontSize: "16px",
+                                        color: "#000000",
+                                        marginBottom: "10px",
+                                    }}
+                                >
+                                    Số điện thoại: {driver.phone}
+                                </Text>
+                                <Text
+                                    as="p"
+                                    sx={{
+                                        fontSize: "16px",
+                                        color: "#000000",
+                                        marginBottom: "10px",
+                                    }}
+                                >
+                                    Thời gian lấy hàng dự kiến: 8 giờ 30. Ngày
+                                    22/12/2021
+                                </Text>
+                                <Text
+                                    as="p"
+                                    sx={{
+                                        fontSize: "16px",
+                                        color: "#000000",
+                                        marginBottom: "10px",
+                                    }}
+                                >
+                                    Thời gian nhận hàng dự kiến: 8 giờ 30. Ngày
+                                    22/12/2021
+                                </Text>
+                            </Box>
                         </Box>
-                    </Box>
+                    )}
+
                     <Box sx={{ width: "50%", paddingRight: "20px" }}>
                         <Text
                             as="p"

@@ -171,14 +171,13 @@ const Signin = (props) => {
               <p className="subtitle">
                 <button
                   type="button"
-                  onClick={() => setForgotModal(true)}
                 >
                   Forget Password
                 </button>
               </p>
               <p className="subtitle">
                 Don't have an account?
-                <Link to="/StudentsSignup">sign Up</Link>
+                <Link to="/register">sign Up</Link>
               </p>
             </div>
           </div>

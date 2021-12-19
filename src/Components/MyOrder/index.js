@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 // import "../../styles.css";
 import emailjs from "emailjs-com";
 import { app } from "../../firebaseConfig";
-import Modal from './modal'
+import Modal from "./modal";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router";
@@ -12,31 +12,67 @@ const MyOrders = () => {
     const [data, setData] = useState(null);
     const [dataModal, setDataModal] = useState(null);
     const history = useHistory();
-    const db_Transactions = app.database().ref().child(`/system/transactions/`);
-
+    console.log(customer);
+    const db_Transactions = app
+        .database()
+        .ref()
+        .child(`/transactions`)
+        .orderByChild("customerId")
+        .equalTo(customer.currentUser.customerId);
     useEffect(() => {
         if (!customer.currentUser.customerId) {
             history.push("/login");
         }
         db_Transactions.once("value", function (snap) {
-            console.log(snap.val());
-            const result = [];
             if (snap.val()) {
-                Object.values(snap.val()).forEach((parent) => {
-                    Object.values(parent).forEach((child) => {
-                        if (
-                            child.customerId === customer.currentUser.customerId
-                        ) {
-                            result.push(child);
-                        }
-                    });
-                    if (result.length) {
-                        setData(result);
-                    }
-                });
+                setData(Object.values(snap.val()));
             }
         });
-    }, [customer]);
+    }, []);
+    const renderStatus = (status) => {
+        let returnVal = "";
+        switch (status) {
+            case "pending":
+                returnVal = "Chờ xử lý";
+                break;
+            case "driverPending":
+                returnVal = "Chờ xử lý";
+                break;
+            case "inProgress":
+                returnVal = "Đang giao";
+                break;
+            case "completed":
+                returnVal = "Đã hoàn tất";
+                break;
+            case "canceled":
+                returnVal = "Đã hủy";
+                break;
+            default:
+                break;
+        }
+        return returnVal;
+    };
+    const handleCanel = (id) => {
+        if (confirm("Xác nhận hủy?")) {
+            const db_Transactions = app
+                .database()
+                .ref()
+                .child(`/transactions/${id}`);
+            db_Transactions
+                .update({
+                    status: "canceled",
+                })
+                .then(() => {
+                    const newData = data.map((item) => {
+                        if (item.transactionId === id) {
+                            return { ...item, status: "canceled" };
+                        }
+                        return item;
+                    });
+                    setData(newData);
+                });
+        }
+    };
 
     return (
         <>
@@ -60,7 +96,7 @@ const MyOrders = () => {
                 <div class="container">
                     <table class="his-orders table table-striped">
                         <thead>
-                            <tr className='text-center'>
+                            <tr className="text-center">
                                 <th scope="col">STT</th>
                                 <th scope="col">Ngày tạo</th>
                                 <th scope="col">Mã đơn hàng</th>
@@ -77,16 +113,11 @@ const MyOrders = () => {
                                             ? "badge-warning"
                                             : val.status === "inProgress"
                                             ? "badge-primary"
-                                            : "badge-success";
-                                    const status =
-                                        val.status === "pending"
-                                            ? "Chờ xử lý"
-                                            : val.status === "inProgress"
-                                            ? "Đang chuyển"
-                                            : "Đã hoàn thành";
-
+                                            : val.status === "completed"
+                                            ? "badge-success"
+                                            : "badge-danger";
                                     return (
-                                        <tr className='text-center' key={index}>
+                                        <tr className="text-center" key={index}>
                                             <th scope="row">{index + 1}</th>
                                             <td>{val.initialTime}</td>
                                             <td>{val.transportCode}</td>
@@ -100,20 +131,27 @@ const MyOrders = () => {
                                                 <span
                                                     class={`badge ${className}`}
                                                 >
-                                                    {status}
+                                                    {renderStatus(val.status)}
                                                 </span>
                                             </td>
-                                            <td className='text-center'>
+                                            <td className="text-center">
                                                 {val.status === "pending" && (
                                                     <button
                                                         class={`btn btn-danger mr-1`}
+                                                        onClick={() =>
+                                                            handleCanel(
+                                                                val?.transactionId
+                                                            )
+                                                        }
                                                     >
                                                         Hủy bỏ
                                                     </button>
                                                 )}
                                                 <button
                                                     class={`btn btn-primary`}
-                                                    onClick={()=>{setDataModal(val)}}
+                                                    onClick={() => {
+                                                        setDataModal(val);
+                                                    }}
                                                 >
                                                     Chi tiết
                                                 </button>
@@ -121,12 +159,18 @@ const MyOrders = () => {
                                         </tr>
                                     );
                                 })}
-                           
                         </tbody>
                     </table>
                 </div>
             </section>
-            {dataModal && <Modal transaction={dataModal} onClose={()=>{setDataModal(null)}}/>}
+            {dataModal && (
+                <Modal
+                    transaction={dataModal}
+                    onClose={() => {
+                        setDataModal(null);
+                    }}
+                />
+            )}
         </>
     );
 };

@@ -1,6 +1,8 @@
 import React, { lazy, Suspense, useEffect  } from "react";
 import { Route, Switch, Redirect } from "react-router";
 import Signin from "./Components/Signin/Signin";
+import Register from "./Components/Signup/StudentsSignup";
+
 import StudentsSignup from "./Components/Signup/StudentsSignup";
 import InstitutionSignup from "./Components/Signup/InstitutionSignup";
 import Dashboard from "./Components/Dashboard";
@@ -34,6 +36,7 @@ const App = (props) => {
           <Route path="/CustomerSignup" component={StudentsSignup} />
           <Route path="/InstitutionSignup" component={InstitutionSignup} />
           <Route path="/login" component={Signin} />
+          <Route path="/register" component={Register} />
           <Route path="/order" component={Order} />
           <Route path="/" component={RedirectHome} />
         </Switch>
