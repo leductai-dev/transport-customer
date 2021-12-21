@@ -7,22 +7,26 @@ import Modal from "./modal";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router";
+import convertDate from './ConvertDate'
 const MyOrders = () => {
     const customer = useSelector((state) => state.user);
     const [data, setData] = useState(null);
     const [dataModal, setDataModal] = useState(null);
     const history = useHistory();
     console.log(customer);
-    const db_Transactions = app
+    
+    useEffect(() => {
+        if (!customer.currentUser.customerId) {
+            history.push("/login");
+            return
+        }
+        const db_Transactions = app
         .database()
         .ref()
         .child(`/transactions`)
         .orderByChild("customerId")
         .equalTo(customer.currentUser.customerId);
-    useEffect(() => {
-        if (!customer.currentUser.customerId) {
-            history.push("/login");
-        }
+
         db_Transactions.once("value", function (snap) {
             if (snap.val()) {
                 setData(Object.values(snap.val()));
@@ -63,6 +67,7 @@ const MyOrders = () => {
                     status: "canceled",
                 })
                 .then(() => {
+                    alert("Hủy yêu cầu thành công!")
                     const newData = data.map((item) => {
                         if (item.transactionId === id) {
                             return { ...item, status: "canceled" };
@@ -70,9 +75,11 @@ const MyOrders = () => {
                         return item;
                     });
                     setData(newData);
+                    setDataModal(null)
                 });
         }
     };
+
 
     return (
         <>
@@ -119,7 +126,7 @@ const MyOrders = () => {
                                     return (
                                         <tr className="text-center" key={index}>
                                             <th scope="row">{index + 1}</th>
-                                            <td>{val.initialTime}</td>
+                                            <td>{convertDate(val.initialTime)}</td>
                                             <td>{val.transportCode}</td>
                                             <td>
                                                 {
@@ -128,25 +135,14 @@ const MyOrders = () => {
                                                 }
                                             </td>
                                             <td>
-                                                <span
+                                                <span style={{minWidth: '68px'}}
                                                     class={`badge ${className}`}
                                                 >
                                                     {renderStatus(val.status)}
                                                 </span>
                                             </td>
                                             <td className="text-center">
-                                                {val.status === "pending" && (
-                                                    <button
-                                                        class={`btn btn-danger mr-1`}
-                                                        onClick={() =>
-                                                            handleCanel(
-                                                                val?.transactionId
-                                                            )
-                                                        }
-                                                    >
-                                                        Hủy bỏ
-                                                    </button>
-                                                )}
+                                                
                                                 <button
                                                     class={`btn btn-primary`}
                                                     onClick={() => {
@@ -169,6 +165,7 @@ const MyOrders = () => {
                     onClose={() => {
                         setDataModal(null);
                     }}
+                    handleCanel={handleCanel}
                 />
             )}
         </>

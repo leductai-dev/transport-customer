@@ -6,8 +6,9 @@ import { Box, Button, Text, Image } from "rebass";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router";
+import convertDate from "./ConvertDate";
 
-const modal = ({ transaction, onClose }) => {
+const modal = ({ transaction, onClose, handleCanel }) => {
     const customer = useSelector((state) => state.user);
     const { initialTime, shippingInfo, transportCode } = transaction;
     const note = transaction?.note;
@@ -30,9 +31,9 @@ const modal = ({ transaction, onClose }) => {
     const className =
         transaction.status === "pending"
             ? "badge-warning"
-            : val.status === "inProgress"
+            : transaction.status === "inProgress"
             ? "badge-primary"
-            : val.status === "completed"
+            : transaction.status === "completed"
             ? "badge-success"
             : "badge-danger";
     const renderStatus = () => {
@@ -86,10 +87,10 @@ const modal = ({ transaction, onClose }) => {
             const db_driver = app
                 .database()
                 .ref()
-                .child(`/driver/${transaction?.driverId}`);
+                .child(`/drivers/${transaction?.driverId}`);
             db_driver.on("value", function (snap) {
                 if (snap.val()) {
-                    const _driver = Object.values(snap.val())[0];
+                    const _driver = snap.val();
                     const driverAdress = {
                         lat: _driver.vehicleStatus.lat,
                         lng: _driver.vehicleStatus.long,
@@ -159,7 +160,7 @@ const modal = ({ transaction, onClose }) => {
                     Ngày khởi tạo:
                 </Text>
                 <Text sx={{ marginRight: "50px", fontSize: "15px" }}>
-                    15-10-2021
+                    {convertDate(transaction?.initialTime)}
                 </Text>
                 <Button
                     sx={{
@@ -174,7 +175,7 @@ const modal = ({ transaction, onClose }) => {
                         onClose();
                     }}
                 >
-                    X
+                    <i class="fa fa-times" aria-hidden="true"></i>
                 </Button>
             </Box>
             <Box
@@ -230,28 +231,41 @@ const modal = ({ transaction, onClose }) => {
                                 >
                                     Số điện thoại: {driver.phone}
                                 </Text>
-                                <Text
-                                    as="p"
-                                    sx={{
-                                        fontSize: "16px",
-                                        color: "#000000",
-                                        marginBottom: "10px",
-                                    }}
-                                >
-                                    Thời gian lấy hàng dự kiến: 8 giờ 30. Ngày
-                                    22/12/2021
-                                </Text>
-                                <Text
-                                    as="p"
-                                    sx={{
-                                        fontSize: "16px",
-                                        color: "#000000",
-                                        marginBottom: "10px",
-                                    }}
-                                >
-                                    Thời gian nhận hàng dự kiến: 8 giờ 30. Ngày
-                                    22/12/2021
-                                </Text>
+                                {transaction?.arrivalTime && (
+                                    <Text
+                                        as="p"
+                                        sx={{
+                                            fontSize: "16px",
+                                            color: "#000000",
+                                            marginBottom: "10px",
+                                        }}
+                                    >
+                                        Thời gian lấy hàng dự kiến:{" "}
+                                        {new Date(
+                                            transaction.arrivalTime
+                                        ).toLocaleTimeString()}{" "}
+                                        {"-"}{" "}
+                                        {convertDate(transaction.arrivalTime)}
+                                    </Text>
+                                )}
+
+                                {transaction?.deliveryTime && (
+                                    <Text
+                                        as="p"
+                                        sx={{
+                                            fontSize: "16px",
+                                            color: "#000000",
+                                            marginBottom: "10px",
+                                        }}
+                                    >
+                                        Thời gian giao hàng dự kiến:{" "}
+                                        {new Date(
+                                            transaction.deliveryTime
+                                        ).toLocaleTimeString()}{" "}
+                                        {"-"}{" "}
+                                        {convertDate(transaction.deliveryTime)}
+                                    </Text>
+                                )}
                             </Box>
                         </Box>
                     )}
@@ -478,6 +492,34 @@ const modal = ({ transaction, onClose }) => {
                                     ></Image>
                                 </Box>
                             ))}
+                        </Box>
+                    </Box>
+                    <Box mt={5} sx={{ width: "100%", paddingRight: "10px" }}>
+                        <Box
+                            sx={{
+                                columnCount: 2,
+                                lineHeight: "40px",
+                                display: "flex",
+                                pt: "10px",
+                                justifyContent: "flex-end",
+                            }}
+                        >
+                            {transaction.status === "pending" && (
+                                <button
+                                    class={`btn btn-danger mr-2`}
+                                    onClick={() =>
+                                        handleCanel(transaction?.transactionId)
+                                    }
+                                >
+                                    Hủy yêu cầu
+                                </button>
+                            )}
+                            <button
+                                class={`btn btn-primary mr-1`}
+                                onClick={() => onClose()}
+                            >
+                                Quay lại
+                            </button>
                         </Box>
                     </Box>
                 </Box>

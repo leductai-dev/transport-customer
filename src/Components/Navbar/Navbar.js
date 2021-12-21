@@ -1,15 +1,16 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext,  } from "react";
 import { Link } from "react-router-dom";
 import $ from "jquery";
 import AuthContext from "../../Context/auth-context";
 import "./Navbar.css";
-import {useSelector,useDispatch} from 'react-redux'
+import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../../Actions/Actions";
-import localforage from "localforage";
-
+import { Box, Text, Button } from "rebass";
+import { withRouter,useHistory } from 'react-router';
 const Navbar = (props) => {
+    const history = useHistory()
     const customer = useSelector((state) => state.user);
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     if (window.matchMedia("(min-width: 768px)").matches) {
         $(document).ready(function () {
             $(window).scroll(function () {
@@ -60,22 +61,13 @@ const Navbar = (props) => {
                     );
                 }
             });
-
         });
     }
     // const history = useHistory();
     const authCtx = useContext(AuthContext);
-    const [user, setUser] = useState("");
+    const [open, setOpen] = useState(false);
     const [isOverlay, setIsOverlay] = useState(false);
 
-    useEffect(() => {
-        // console.log("navbar", authCtx.isLoggedIn, authCtx.user);
-        setUser(authCtx.user);
-        authCtx.setHistory(props.history);
-        // to set the history and to be used in authContext logout
-    }, [authCtx]);
-
- 
     const categories = [
         {
             categoryName: "Thuê xe tải",
@@ -109,41 +101,44 @@ const Navbar = (props) => {
             ],
         },
     ];
-     const courseUi = categories.map((cat, i) => {
-            return (
-                <li>
-                    <Link className="dropdown-item" to={cat.link}>
-                        {cat.categoryName}
-                        <i className="fas fa-chevron-right"></i>
-                    </Link>
-                    <ul style={{
-                      width: '300px',
-                      height: 'auto'
-                    }} className="sub-menu">
-                        {cat.subcategoryList.map((subcat) => {
-                            return (
-                                <li>
-                                    <Link
-                                        className="dropdown-item"
-                                        to={subcat.link}
-                                    >
-                                        {subcat.categoryName}
-                                    </Link>
-                                </li>
-                            );
-                        })}
-                        <li>
-                            <Link
-                                className="dropdown-item"
-                                to={`/dashboard/courses`}
-                            >
-                                Detail
-                            </Link>
-                        </li>
-                    </ul>
-                </li>
-            );
-        });
+    const courseUi = categories.map((cat, i) => {
+        return (
+            <li>
+                <Link className="dropdown-item" to={cat.link}>
+                    {cat.categoryName}
+                    <i className="fas fa-chevron-right"></i>
+                </Link>
+                <ul
+                    style={{
+                        width: "300px",
+                        height: "auto",
+                    }}
+                    className="sub-menu"
+                >
+                    {cat.subcategoryList.map((subcat) => {
+                        return (
+                            <li>
+                                <Link
+                                    className="dropdown-item"
+                                    to={subcat.link}
+                                >
+                                    {subcat.categoryName}
+                                </Link>
+                            </li>
+                        );
+                    })}
+                    <li>
+                        <Link
+                            className="dropdown-item"
+                            to={`/dashboard/courses`}
+                        >
+                            Detail
+                        </Link>
+                    </li>
+                </ul>
+            </li>
+        );
+    });
 
     return (
         <>
@@ -215,47 +210,106 @@ const Navbar = (props) => {
                             </Link>
                         </li>
                         <li className="nav-item">
-                           
                             <Link
                                 action="push"
                                 className="nav-link"
                                 to={`/dashboard/myorders`}
                             >
-                              Đơn của tôi
+                                Đơn của tôi
                             </Link>
                         </li>
                         {customer.currentUser.customerId ? (
-                            <>
-                                
-                                <li className="nav-item">
-                                    <button
-                                        type="button"
-                                        className="nav-link"
-                                        style={{
-                                            background: "transparent",
-                                            border: "none",
-                                            padding: '15px 20px 24px'
-                                        }}
-                                        onClick={()=>{dispatch(logoutUser())
-                                            localStorage.removeItem('user')
-                                        }}
-                                    >
-                                        Logout
-                                    </button>
-                                </li>
+                            <Box sx={{ position: "relative" }}>
                                 <button
-                                        type="button"
-                                        className="nav-link"
-                                        style={{
-                                            background: "transparent",
-                                            border: "none",
-                                            padding: '15px 10px 24px'
+                                    type="button"
+                                    className="nav-link"
+                                    style={{
+                                        background: "transparent",
+                                        border: "none",
+                                        padding: "15px 10px 24px",
+                                    }}
+                                    onClick={() => {
+                                        setOpen(true);
+                                    }}
+                                >
+                                    Chào, {customer?.currentUser?.name}
+                                </button>
+                                {open && (
+                                    <Box
+                                        sx={{
+                                            position: "absolute",
+                                            top: 50,
+                                            left: 20,
+                                            width: "200px",
+                                            height: "250px",
+                                            zIndex: 1,
+                                            background: "white",
+                                            padding: "22px 18px",
+                                            borderRadius: "10px",
+                                            overflow: "hidden",
+                                            cursor: "default",
                                         }}
-                                        onClick={authCtx.logout}
                                     >
-                                        Chào, {customer?.currentUser?.name}
-                                    </button>
-                            </>
+                                        <Button
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                setOpen(false);
+                                            }}
+                                            sx={{
+                                                position: "absolute",
+                                                top: 0,
+                                                right: 0,
+                                                background: "none",
+                                                color: "black",
+                                                cursor: "pointer",
+                                            }}
+                                        >
+                                            <i
+                                                class="fa fa-times"
+                                                aria-hidden="true"
+                                            ></i>
+                                        </Button>
+                                        <Box
+                                            py={2}
+                                            sx={{
+                                                color: "black",
+                                                borderBottom:
+                                                    "1px solid #8080804d",
+                                                fontSize: "14px",
+                                            }}
+                                        >
+                                            Thông tin cá nhân
+                                        </Box>
+                                        <Box
+                                            py={2}
+                                            sx={{
+                                                color: "black",
+                                                borderBottom:
+                                                    "1px solid #8080804d",
+                                                fontSize: "14px",
+                                            }}
+                                        >
+                                            Đơn hàng
+                                        </Box>
+                                        <Box
+                                            py={2}
+                                            sx={{
+                                                color: "black",
+                                                borderBottom:
+                                                "1px solid #8080804d",
+                                                fontSize: "14px",
+                                            }}
+                                            onClick={() => {
+                                                dispatch(logoutUser());
+                                                localStorage.removeItem("user");
+                                                history.push('/login')
+                                            }}
+                                        >
+                                            Đăng xuất
+                                        </Box>
+                                    </Box>
+                                )}
+                            </Box>
                         ) : (
                             <li className="nav-item">
                                 <i className="far fa-user" id="usericon"></i>
@@ -264,7 +318,7 @@ const Navbar = (props) => {
                                     className="nav-link"
                                     to={`/login`}
                                 >
-                                    Login&nbsp;/&nbsp;Register
+                                    Đăng nhập/Đăng kí
                                 </Link>
                             </li>
                         )}
@@ -275,4 +329,4 @@ const Navbar = (props) => {
     );
 };
 
-export default Navbar;
+export default withRouter(Navbar);
